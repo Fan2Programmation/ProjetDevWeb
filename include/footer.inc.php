@@ -11,6 +11,6 @@ declare(strict_types=1);
             </span>
             <span><a href="tech.php">PAGE TECH</a></span>
             <span>Nombre de visites : <?php echo $hits; ?></span>
-        </footer>
+        </footer> 
     </body>
 </html>
