@@ -10,11 +10,23 @@
 
         <main>
             <section>
-            <h2>horaires de trains et informations en gare</h2>
-                <article id= "exercice1">
-                    <h3>Exercice 1</h3>
+                <article id= "horaires de trains et informations en gare">
+                    <h2>Horaires de trains et informations en gare</h2>
+                    <form action="functions.inc.php" method="post">
+                        <p>
+                            <label for="search">Entrez une ville:</label>
+                            <input type="search" id="search" name="q" placeholder="Entrez une ville..."/>
+                            <button type="submit">Rechercher</button>
+                        </p>
+                    </form>
                     <?php
-                        print(afficherGares("Paris"));
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['q'])) {
+                            $recherche = $_POST['q'];
+                        
+                            $resultats = afficherGares($recherche);
+                        } else {
+                            $resultats = "Veuillez entrer une recherche.";
+                        }
                     ?>
                 </article>
             </section>
