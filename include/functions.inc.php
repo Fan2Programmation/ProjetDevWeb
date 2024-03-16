@@ -99,7 +99,7 @@
     }
 
     function rechercherGares($recherche) {
-        $apiKey = "VOTRE_CLE_API";
+        $apiKey = "a908747a-e6e5-420e-a91d-7590dc83d005";
         $url = "https://api.sncf.com/v1/places?q=" . urlencode($recherche);
     
         $ch = curl_init();
@@ -116,8 +116,15 @@
             return "Erreur lors de la récupération des données.";
         }
     
-        return json_decode($resultat, true);
+        $data = json_decode($resultat, true);
+    
+        if (!isset($data['places'])) {
+            return "Aucune gare trouvée.";
+        }
+    
+        return $data;
     }
+    
     
     function afficherGares($recherche) {
         $donnees = rechercherGares($recherche);
