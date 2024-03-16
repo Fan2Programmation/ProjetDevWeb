@@ -9,7 +9,7 @@
         <meta name="keywords" content="<?php echo $keywords?>"/>
         <!-- Cette balise permet de renseigner l'auteur du site-->
         <meta name="author" content="Thibault TERRIE, Hayder UR REHMAN"/>
-        <link rel="stylesheet" href="../styleprojet.css"/>
+        <link rel="stylesheet" href="./styleprojet.css"/>
     </head>
     <body>
         <header>
