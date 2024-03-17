@@ -12,16 +12,14 @@
             <section>
                 <article id= "horaires de trains et informations en gare">
                     <h2>Horaires de trains et informations en gare</h2>
-                    <form action="functions.inc.php" method="post">
-                        <p>
+                    <form action="index.php" method="get">
                             <label for="search">Entrez une ville:</label>
                             <input type="search" id="search" name="q" placeholder="Entrez une ville..."/>
                             <button type="submit">Rechercher</button>
-                        </p>
                     </form>
                     <?php
-                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['q'])) {
-                            $recherche = $_POST['q'];
+                        if ($_SERVER["REQUEST_METHOD"] == "GET" && !empty($_GET['q'])) {
+                            $recherche = $_GET['q'];
                         
                             $resultats = afficherGares($recherche);
                         } else {
