@@ -115,7 +115,31 @@
             return null;
         }
     }
-    
-    
+
+    function infoGare($recherche) {
+        $apiToken = "1c71d47a-f4fc-41d8-97d1-00ec54f6d83d";
+        $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&type[]=stop_area&key=$apiToken";
+                          
+        $fluxjson = file_get_contents($url);
+        if ($fluxjson !== false) {
+            $donnee = json_decode($fluxjson, true);
+            $suggestions = array();
+            foreach ($donnee['places'] as $place) {
+                $suggestions[] = $place['name'];
+            }
+            echo "<h3>Résultats de la recherche pour '$recherche'</h3>";
+            if (!empty($suggestions)) {
+                echo "<ul>";
+                foreach ($suggestions as $gare) {
+                    echo "<li><a href='?nom=".urlencode($gare)."'>$gare</a></li>";
+                }
+                echo "</ul>";
+            } else {
+                echo "Aucune gare trouvée pour '$recherche'";
+            }
+        } else {
+            echo "Erreur lors de la récupération des suggestions";
+        }
+    }
 
 ?>
