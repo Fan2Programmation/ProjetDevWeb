@@ -99,14 +99,14 @@
     }
 
     function rechercherGares($recherche) {
-        $apiKey = "a908747a-e6e5-420e-a91d-7590dc83d005";
+        $apiToken = "	e4732adc-eefe-4b2c-b528-acdc6bd2f1c5";
         $url = "https://api.sncf.com/v1/places?q=" . urlencode($recherche);
     
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: " . $apiKey
+            "Authorization: " . $apiToken
         ));
     
         $resultat = curl_exec($ch);
