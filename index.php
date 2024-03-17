@@ -12,7 +12,7 @@
             <section>
                 <article id= "recherchegare">
                     <h2>Horaires de trains et informations en gare</h2>
-                    <form action="index.php" method="post">
+                    <form action="" method="post">
                     <label for="nom">Entrez un nom de gare :</label>
                     <input type="text" id="nom" name="nom" required>
                     <input type="submit" value="Rechercher">
@@ -20,8 +20,8 @@
                     <?php
                         if (isset($_POST['nom'])) {
                             $nom_gare = $_POST['nom'];
-                            $api_key = 'a908747a-e6e5-420e-a91d-7590dc83d005';
-                            $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&type[]=stop_area&key=$apiKey";                     
+                            $api_key = '1c71d47a-f4fc-41d8-97d1-00ec54f6d83d';
+                            $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&type[]=stop_area&key=$api_key";                     
                             $fluxjson = file_get_contents($url);
                             if ($fluxjson !== false) {
                                 $donnee = json_decode($fluxjson, true);
