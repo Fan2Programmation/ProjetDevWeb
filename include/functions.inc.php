@@ -100,44 +100,22 @@
 
     function rechercherGares($recherche) {
         $apiToken = "	e4732adc-eefe-4b2c-b528-acdc6bd2f1c5";
-        $url = "https://api.sncf.com/v1/places?q=" . urlencode($recherche);
+        $url = "https://api.sncf.com/v1/places?q=" . urlencode($recherche) . "&type[]=stop_area&key=$apiToken";
     
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: " . $apiToken
-        ));
-    
-        $resultat = curl_exec($ch);
-        curl_close($ch);
-    
-        if ($resultat === false) {
-            return "Erreur lors de la récupération des données.";
+        $fluxjson = file_get_contents($url);
+        if ($fluxjson !== false) {
+            $donnee = json_decode($fluxjson, true);
+            if (!empty($donnee['places'])) {
+                $gare_info = $donnee['places'][0];
+                return $gare_info;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
         }
-    
-        $data = json_decode($resultat, true);
-    
-        if (!isset($data['places'])) {
-            return "Aucune gare trouvée.";
-        }
-    
-        return $data;
     }
     
-    
-    function afficherGares($recherche) {
-        $donnees = rechercherGares($recherche);
-    
-        $res = "<table>\n";
-        $res .= "<tr><th>Nom de la gare</th><tr>";
-        foreach ($donnees['places'] as $place) {
-            $res .= "<tr><td>" . htmlspecialchars($place['name']) . "</td></tr>";
-        }
-        $res .= "</table>";
-
-        return $res;
-    }
     
 
 ?>
