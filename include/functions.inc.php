@@ -99,8 +99,8 @@
     }
 
     function rechercherGares($recherche) {
-        $apiToken = "	e4732adc-eefe-4b2c-b528-acdc6bd2f1c5";
-        $url = "https://api.sncf.com/v1/places?q=" . urlencode($recherche) . "&type[]=stop_area&key=$apiToken";
+        $apiToken = "1c71d47a-f4fc-41d8-97d1-00ec54f6d83d";
+        $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&type[]=stop_area&key=$apiToken";
     
         $fluxjson = file_get_contents($url);
         if ($fluxjson !== false) {
