@@ -11,20 +11,16 @@
         <main>
             <section>
                 <article id= "recherchegare">
-                    <h2>Recherche&Informations gare</h2>
-                    <form action="index.php" method="post">
-                    <label for="nom">Entrez un nom de gare:</label>
-                    <input type="search" id="nom" name="nom" placeholder="Entrez votre recherche..." required/>
-                    <button type="submit">Rechercher</button>
+                    <h2>Recherche & Informations d'une gare</h2>
+                    <form action="index.php" method="get">
+                        <label for="nom">Entrez un nom de gare : </label>
+                        <input type="search" id="nom" name="nom" placeholder="Entrez votre recherche..." required/>
+                        <button type="submit">Rechercher</button>
                     </form>
                     <?php
-                        if (isset($_POST['nom'])) {
-                            $nom = $_POST['nom'];
-                            $gare_info = infoGare($nom);
-                            echo $gare_info;
-                        }
                         if(isset($_GET['nom'])) {
                             $choix_gare = $_GET['nom'];
+                            echo infoGare($choix_gare);
                             $gare_info = rechercherGares($choix_gare);
                             if ($gare_info !== null) {
                                 echo "<h3>Informations: $choix_gare</h3>";
