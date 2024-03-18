@@ -98,22 +98,35 @@
         return $res;
     }
 
-    function informationsGare(string $recherche):array {
+    function informationsGare(string $recherche):void {
         $apiToken = "e4732adc-eefe-4b2c-b528-acdc6bd2f1c5";
         $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&key=$apiToken";
     
         $fluxjson = file_get_contents($url);
         if ($fluxjson !== false) {
             $donnee = json_decode($fluxjson, true);
-            if (!empty($donnee['places'])) {
-                $gare_info = $donnee['places'][0];
-                return $gare_info;
+        }
+        $infos = $donnee['places'];
+        if (count($infos) == 1) {
+            $gare = $infos[0];
+            echo "<h3>Informations: $recherche</h3>";
+            echo "<p>Nom : ".$gare['name']."</p>";
+            if (isset($gare['stop_area']['coord']['lat']) && isset($gare['stop_area']['coord']['lon'])) {
+                echo "<p>Coordonnées : Latitude " . $gare['stop_area']['coord']['lat'] . ", Longitude " . $gare['stop_area']['coord']['lon'] . "</p>";
             } else {
-                return null;
+                echo "<p>Coordonnées : Information non disponible</p>";
+            }
+            if(isset($gare['stop_area']['lines'])) {
+                echo "<ul>\n\t<h4>Lignes de bus passant par cet arrêt : </h4>\n";
+                foreach($gare['stop_area']['lines'] as $ligne_de_bus) {
+                    echo "\t<li>Ligne n°:".$ligne_de_bus['code']." ".$ligne_de_bus['name']."</li>\n";
+                }
+                echo "</ul>";
             }
         } else {
-            return null;
+            echo "Sélectionnez une gare pour obtenir des informations\n";
         }
+        echo '<a href="index.php" style="display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;">Retour</a>';
     }
 
     function listeGaresSimilaires(string $recherche):void {
