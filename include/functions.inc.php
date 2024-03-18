@@ -1,7 +1,7 @@
 <?php
     declare(strict_types=1);
 
-    function afficher_contenu(): string {
+    function afficher_contenu():string {
         // notre clé API donnée par la NASA
         $API_KEY = "aP0WZbXQAdVEsMHTU3d4ZlpnHQNBTz0jsgrBeKdl";
         // l'URL de l'API avec notre clé dedans
@@ -21,7 +21,7 @@
     
 
 
-    function position_geographiqueXML() {
+    function position_geographiqueXML():string {
         // Récupération de l'adressse ip de l'utilisateur
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         // l'URL de l'API avec l'adresse ip dedans
@@ -49,7 +49,7 @@
         return $res;
     }
     
-    function position_geographiqueJSON(){
+    function position_geographiqueJSON():string{
 
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $url = "https://ipinfo.io/{$ipAddress}/geo";
@@ -74,7 +74,7 @@
         return $res;
     }
 
-    function extraction_infoXML() {
+    function extraction_infoXML():string {
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $apiKey = "58b774fda81ebc97a84914C65290112b";
         $url = "https://api.whatismyip.com/ip-address-lookup.php?key=$apiKey&input=$ipAddress&output=xml";
@@ -98,9 +98,9 @@
         return $res;
     }
 
-    function rechercherGares($recherche) {
-        $apiToken = "1c71d47a-f4fc-41d8-97d1-00ec54f6d83d";
-        $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&type[]=stop_area&key=$apiToken";
+    function informationsGare(string $recherche):array {
+        $apiToken = "e4732adc-eefe-4b2c-b528-acdc6bd2f1c5";
+        $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&key=$apiToken";
     
         $fluxjson = file_get_contents($url);
         if ($fluxjson !== false) {
@@ -116,9 +116,9 @@
         }
     }
 
-    function infoGare($recherche) {
-        $apiToken = "1c71d47a-f4fc-41d8-97d1-00ec54f6d83d";
-        $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&type[]=stop_area&key=$apiToken";
+    function listeGaresSimilaires(string $recherche):void {
+        $apiToken = "e4732adc-eefe-4b2c-b528-acdc6bd2f1c5";
+        $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&key=$apiToken";
                           
         $fluxjson = file_get_contents($url);
         if ($fluxjson !== false) {

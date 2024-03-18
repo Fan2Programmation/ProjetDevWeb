@@ -20,8 +20,8 @@
                     <?php
                         if(isset($_GET['nom'])) {
                             $choix_gare = $_GET['nom'];
-                            echo infoGare($choix_gare);
-                            $gare_info = rechercherGares($choix_gare);
+                            echo listeGaresSimilaires($choix_gare);
+                            $gare_info = informationsGare($choix_gare);
                             if ($gare_info !== null) {
                                 echo "<h3>Informations: $choix_gare</h3>";
                                 echo "<p>Nom : ".$gare_info['name']."</p>";
