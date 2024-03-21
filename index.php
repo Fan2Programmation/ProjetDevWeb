@@ -22,7 +22,7 @@
                             echo listeGaresSimilaires($_GET['recherche']);
                         }
                         if(isset($_GET['gare'])) {
-                            echo findUIC($_GET['gare']);
+                            echo findID($_GET['gare']);
                         }
                     ?>
                 </article>

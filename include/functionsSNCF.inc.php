@@ -3,21 +3,21 @@
     define("TOKEN", "bb7b800f-8205-41c0-998c-09e0f55c2ed7");
 
     /**
-     * Fonction pour trouver le code UIC de la gare voulue
-     * @param gare la gare dont on veut récupérer le code UIC
-     * @return uic le code uic
+     * Fonction pour trouver l'identifiant de la gare voulue
+     * @param gare la gare dont on veut récupérer l'identifiant
+     * @return id l'identifiant
      */
-    function findUIC(string $gare):string {
+    function findID(string $gare):string {
         $url = "https://".TOKEN."@api.sncf.com/v1/coverage/sncf/places?q=".urlencode($gare);
-        $uic = "";
+        $id = "";
 
         $fluxjson = file_get_contents($url);
         if ($fluxjson !== false) {
             $donnees = json_decode($fluxjson, true);
-            $uic .= $donnees['places']['0']['id'];
+            $id .= $donnees['places']['0']['id'];
         }    
 
-        return $uic;
+        return $id;
     }
 
     /**
