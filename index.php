@@ -21,8 +21,8 @@
                         if(isset($_GET['recherche'])) {
                             echo listeGaresSimilaires($_GET['recherche']);
                         }
-                        if(isset($_GET['gare'])) {
-                            echo findID($_GET['gare']);
+                        if(isset($_GET['id'])) {
+                            echo afficherProchainsDeparts($_GET['id']);
                         }
                     ?>
                 </article>
