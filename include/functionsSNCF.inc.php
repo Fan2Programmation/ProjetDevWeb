@@ -16,10 +16,10 @@
             $donnees = json_decode($fluxjson, true);
             // On parcourt chaque prochain départ en gare (il y en a 10 à la fois dans le flux JSON)
             foreach($donnees['departures'] as $departure) {
-                $res .= "\t\t\t\t\t<li>Prochain départ à destination de : ".$departure['display_informations']['direction']." à ".decodeTemps($departure['stop_date_time']['departure_date_time'])."</li>\n";
+                $res .= "\t\t\t\t\t\t<li>Prochain départ à destination de : ".$departure['display_informations']['direction']." à ".decodeTemps($departure['stop_date_time']['departure_date_time'])."</li>\n";
             }
         }
-        $res .= "\t\t\t\t</ul>\n";
+        $res .= "\t\t\t\t\t</ul>\n";
         return $res;
     }
 
@@ -53,7 +53,7 @@
         $fluxjson = file_get_contents($url);
 
         $res = "<h3>Résultats de la recherche pour '$recherche'</h3>\n";
-        $res .= "<ul>\n";
+        $res .= "\t\t\t\t\t<ul>\n";
 
         // Si le flux n'est pas vide
         if ($fluxjson !== false) {
@@ -67,11 +67,11 @@
                 // Si la partie numéraire de l'identifiant UIC de l'endroit sélectionné commence par 87, alors c'est une gare ferroviaire, on l'affiche dans les suggestions
                 // Le lien hypertexte permettra d'entrer l'identifiant en paramètre id sur la page
                 if(strpos($partie_numeraire, "87") === 0){
-                    $res .= "\t<li><a href=\"?id=".$place['id']."\">".$place['name']."</a></li>\n";
+                    $res .= "\t\t\t\t\t\t<li><a href=\"?id=".$place['id']."\">".$place['name']."</a></li>\n";
                 }
             }
         }
-        $res .= "</ul>\n";
+        $res .= "\t\t\t\t\t</ul>\n";
         return $res;
     }
 ?>
