@@ -20,6 +20,7 @@
             }
         }
         $res .= "\t\t\t\t\t</ul>\n";
+        $res .= "\t\t\t\t\t<a href=\"index.php\" style=\"display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;\">Retour</a>\n";
         return $res;
     }
 
