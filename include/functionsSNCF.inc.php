@@ -1,6 +1,7 @@
 <?php
     declare(strict_types=1);
     define("TOKEN", "bb7b800f-8205-41c0-998c-09e0f55c2ed7");
+    define("URL", "https://".TOKEN."@api.sncf.com/v1/");
 
     /**
      * Fonction pour trouver l'identifiant de la gare voulue
@@ -8,7 +9,7 @@
      * @return id l'identifiant
      */
     function findID(string $gare):string {
-        $url = "https://".TOKEN."@api.sncf.com/v1/coverage/sncf/places?q=".urlencode($gare);
+        $url = URL."coverage/sncf/places?q=".urlencode($gare);
         $id = "";
 
         $fluxjson = file_get_contents($url);
@@ -25,14 +26,25 @@
      * @param recherche chaine de caractère permettant la recherche d'une gare donnée
      */
     function listeGaresSimilaires(string $recherche):void {
-        $url = "https://".TOKEN."@api.sncf.com/v1/coverage/sncf/places?q=" . urlencode($recherche);
-                          
+        // On récupère le flux JSON correspondant aux informations relatives à notre recherche
+        $url = URL."/coverage/sncf/places?q=" . urlencode($recherche);                   
         $fluxjson = file_get_contents($url);
+
+        // Si le flux n'est pas vide
         if ($fluxjson !== false) {
+            // On décode les données dans un tableau associatif
             $donnees = json_decode($fluxjson, true);
+            // On crée l'array qui va récupérer tous les endroits reconnus avec la recherche
             $suggestions = array();
+            // On parcourt chaque endroit reconnu
             foreach ($donnees['places'] as $place) {
-                $suggestions[] = $place['name'];
+                // l'identifiant uic est sous la forme XX:XXX:00000000, on récupère la partie numéraire 00000000
+                $decoupe = explode(':', $place['id']);
+                $partie_numeraire = $decoupe[2];
+                // Si la partie numéraire de l'identifiant UIC de l'endroit sélectionné commence par 87, alors c'est une gare ferroviaire, on l'affiche dans les suggestions 
+                if(strpos($partie_numeraire, "87") === 0){
+                    $suggestions[] = $place['name'];
+                }
             }
             echo "<h3>Résultats de la recherche pour '$recherche'</h3>";
             if (!empty($suggestions)) {
