@@ -107,14 +107,21 @@
                 foreach ($donnees['journeys'] as $journey) {
                     // Si l'itinéraire est qualifié de meilleur itinéraire entre ces deux gares
                     if(isset($journey['type']) && $journey['type'] === "best") {
-                        // On parcourt chaque section de l'itinéraire
+                        // On parcourt chaque section de l'itinéraire (chaque bouts séparés pas des changements)
                         if(isset($journey['sections'])) {
                             foreach($journey['sections'] as $section) {
-                                // Pour les sections de transport public, afficher les arrêts intermédiaires
+                                // Pour les sections correspondantes à un transport en commun, afficher les arrêts intermédiaires
                                 if ($section['type'] === "public_transport" && isset($section['stop_date_times'])) {
+                                    // On parcourt tous les arrêts de la section de transport en commun
                                     foreach ($section['stop_date_times'] as $stop) {
+                                        // On ajoute le nom de l'arrêt à notre liste non triée
                                         $res .= "\t<li>".$stop['stop_point']['name']."</li>\n";
                                     }
+                                }
+                                // Pour les sections correspondantes à un changement (qualifié par "waiting")
+                                else if ($section['type'] === "waiting") {
+                                    // On notifie un changement dans notre liste en ajoutant un élement vide
+                                    $res .= "\t<li></li>\n";
                                 }
                             }
                         }
