@@ -20,19 +20,20 @@ require "./include/header.inc.php";
 
 <main>
     <section>
+        <h2>Aide à la mobilité</h2>
         <article id="recherchegare">
-            <h2>Aide à la mobilité</h2>
+            <h3>Formulaire à remplir</h3>
             <form action="index.php" method="get" target="_self">
                 <label for="depart">Gare de départ : </label>
-                <input type="search" id="depart" name="depart" placeholder="Entrez la gare de départ" <?php echo isset($_GET['id']) ? "disabled" : "" ?> required />
+                <input type="search" id="depart" name="depart" placeholder="Entrez la gare de départ" <?php echo isset($_GET['id']) ? "disabled='disabled'" : "required='required'" ?>/>
                 <fieldset>
                     <legend>Sélectionnez une option</legend>
                     <span class="form">
-                        <input type="radio" id="departs" name="option" value="departs" <?php echo $selectedOption == 'departs' ? 'checked' : ''; ?> required />
+                        <input type="radio" id="departs" name="option" value="departs" <?php echo $selectedOption == 'departs' ? 'checked="checked"' : ''; ?> required="required" />
                         <label for="departs">Afficher les prochains départs depuis la gare de départ</label>
                     </span>
                     <span class="form">
-                        <input type="radio" id="itineraire" name="option" value="itineraire" <?php echo $selectedOption == 'itineraire' ? 'checked' : ''; ?> />
+                        <input type="radio" id="itineraire" name="option" value="itineraire" <?php echo $selectedOption == 'itineraire' ? 'checked="checked"' : ''; ?> />
                         <label for="itineraire">Afficher l'itinéraire entre la gare de départ et une autre gare</label>
                     </span>
                 </fieldset>
@@ -62,9 +63,9 @@ require "./include/header.inc.php";
                 if (isset($_GET['id']) && !isset($_GET['arrivee'])) {
                     // On lui demande d'entrer une gare d'arrivée en recréant un formulaire tout en gardant l'identifiant de la gare de départ
                     echo "<form action=\"index.php\" method=\"get\" target=\"_self\">\n";
-                    echo "\t\t\t<input type=\"hidden\" name=\"id\" value=\"".$_GET['id']."\" />\n";
+                    echo "\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"".$_GET['id']."\" />\n";
                     echo "\t\t\t\t<label for=\"arrivee\">Gare d'arrivée : </label>\n";
-                    echo "\t\t\t\t<input type=\"search\" id=\"arrivee\" name=\"arrivee\" placeholder=\"Entrez la gare d'arrivée\"".(isset($_GET['id2']) ? "disabled" : "")." required />\n";
+                    echo "\t\t\t\t<input type=\"search\" id=\"arrivee\" name=\"arrivee\" placeholder=\"Entrez la gare d'arrivée\" ".(isset($_GET['id2']) ? "disabled='disabled'" : "")." required='required' />\n";
                     echo "\t\t\t\t<button type=\"submit\">Rechercher</button>\n";
                     echo "\t\t\t</form>\n";
                 }

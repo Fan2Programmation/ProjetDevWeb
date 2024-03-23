@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Projet de développement web</title>
+        <meta charset="UTF-8"/>
+        <!-- Cette balise est une description du site-->
+        <meta name="description" content="Projet de développement web"/>
+        <!-- Cette balise permet de définir des mots-clés pour faciliter la recherche internet-->
+        <meta name="keywords" content="PHP, Université, Projet"/>
+        <!-- Cette balise permet de renseigner l'auteur du site-->
+        <meta name="author" content="Thibault TERRIE, Hayder UR REHMAN"/>
+        <link rel="stylesheet" href="./styleprojet.css"/>
+    </head>
+    <body>
+        <header>
+            <!--Titre du site-->
+            <h1>Projet de Développement Web</h1>
+        </header>
+
+<main>
+    <section>
+        <h2>Aide à la mobilité</h2>
+        <article id="recherchegare">
+            <h3>Formulaire à remplir</h3>
+            <form action="index.php" method="get" target="_self">
+                <label for="depart">Gare de départ : </label>
+                <input type="search" id="depart" name="depart" placeholder="Entrez la gare de départ" disabled='disabled'/>
+                <fieldset>
+                    <legend>Sélectionnez une option</legend>
+                    <span class="form">
+                        <input type="radio" id="departs" name="option" value="departs"  required="required" />
+                        <label for="departs">Afficher les prochains départs depuis la gare de départ</label>
+                    </span>
+                    <span class="form">
+                        <input type="radio" id="itineraire" name="option" value="itineraire" checked="checked" />
+                        <label for="itineraire">Afficher l'itinéraire entre la gare de départ et une autre gare</label>
+                    </span>
+                </fieldset>
+                <button type="submit">Rechercher</button>
+            </form>
+            <form action="index.php" method="get" target="_self">
+				<input type="hidden" name="id" value="stop_area:SNCF:87686006" />
+				<label for="arrivee">Gare d'arrivée : </label>
+				<input type="search" id="arrivee" name="arrivee" placeholder="Entrez la gare d'arrivée" disabled='disabled' required='required' />
+				<button type="submit">Rechercher</button>
+			</form>
+			<h3>Meilleur itinéraire trouvé :</h3>
+			<ul>
+				<li>Paris - Gare de Lyon - Hall 1 2</li>
+				<li>Avignon TGV</li>
+				<li>Aix-en-Provence TGV</li>
+				<li>Marseille Saint-Charles</li>
+				<li></li>
+				<li>Marseille Saint-Charles</li>
+				<li>Toulon</li>
+				<li>Carnoules</li>
+				<li>Les Arcs - Draguignan</li>
+				<li>Saint-Raphaël - Valescure</li>
+			</ul>
+			<a href="index.php" style="display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;">Retour</a>
+        </article>
+    </section>
+</main>
+       <footer>
+            <span>
+                <strong>Contactez-nous : </strong><a href="mailto:fauxmail@gmail.com">fauxmail@gmail.com</a> | Tél : 01-23-45-67-89.
+            </span>
+            <span>
+                Page mise-à-jour le 01/03/2024 à 21:17 par Thibault et Hayder. CY Cergy Paris Université.
+            </span>
+            <span><a href="tech.php">PAGE TECH</a></span>
+            <span>Nombre de visites : 487</span>
+        </footer> 
+    </body>
+</html>

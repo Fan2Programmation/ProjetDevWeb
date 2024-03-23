@@ -95,8 +95,8 @@
         $url = URL."/coverage/sncf/journeys?from=".$id."&to=".$id2;
         $fluxjson = file_get_contents($url);
 
-        $res = "<h3>Meilleur itinéraire trouvé :</h3>\n";
-        $res .= "\t\t\t\t\t<ul>\n";
+        $res = "\t\t\t<h3>Meilleur itinéraire trouvé :</h3>\n";
+        $res .= "\t\t\t<ul>\n";
 
         // Si le flux n'est pas vide
         if ($fluxjson !== false) {
@@ -115,13 +115,13 @@
                                     // On parcourt tous les arrêts de la section de transport en commun
                                     foreach ($section['stop_date_times'] as $stop) {
                                         // On ajoute le nom de l'arrêt à notre liste non triée
-                                        $res .= "\t<li>".$stop['stop_point']['name']."</li>\n";
+                                        $res .= "\t\t\t\t<li>".$stop['stop_point']['name']."</li>\n";
                                     }
                                 }
                                 // Pour les sections correspondantes à un changement (qualifié par "waiting")
                                 else if ($section['type'] === "waiting") {
                                     // On notifie un changement dans notre liste en ajoutant un élement vide
-                                    $res .= "\t<li></li>\n";
+                                    $res .= "\t\t\t\t<li></li>\n";
                                 }
                             }
                         }
@@ -130,8 +130,8 @@
             }
         }
 
-        $res .= "\t\t\t\t\t</ul>\n";
-        $res .= "\t\t\t\t\t<a href=\"index.php\" style=\"display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;\">Retour</a>\n";
+        $res .= "\t\t\t</ul>\n";
+        $res .= "\t\t\t<a href=\"index.php\" style=\"display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;\">Retour</a>\n";
         return $res;
     }
 ?>
