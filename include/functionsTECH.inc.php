@@ -14,7 +14,7 @@
         if ($DATA['media_type'] == 'image') {
             $RESULTAT = "<img src=\"" . $DATA['url'] . "\" alt=\"" . $DATA['title'] . "\">\n";
         } else if ($DATA['media_type'] == 'video') {
-            $RESULTAT = "<video controls\">\n\t<source src=\"" . $DATA['url'] . "\" type=\"video/mp4\">\n\t" . $DATA['title'] . "\n</video>\n";
+            $RESULTAT = "<video controls>\n\t<source src=\"" . $DATA['url'] . "\" type=\"video/mp4\">\n\t" . $DATA['title'] . "\n</video>\n";
         }
         return $RESULTAT;
     }

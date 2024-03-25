@@ -14,5 +14,5 @@
     <body>
         <header>
             <!--Titre du site-->
-            <h1>Projet de Développement Web</h1>
+            <h1>CityTapeur</h1>
         </header>

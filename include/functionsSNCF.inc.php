@@ -1,7 +1,9 @@
 <?php
     declare(strict_types=1);
-    define("TOKEN", "bb7b800f-8205-41c0-998c-09e0f55c2ed7");
-    define("URL", "https://".TOKEN."@api.sncf.com/v1/");
+    define("SNCF_TOKEN", "bb7b800f-8205-41c0-998c-09e0f55c2ed7");
+    define("SNCF_URL", "https://".SNCF_TOKEN."@api.sncf.com/v1/");
+    define("NAVITIA_TOKEN", "e4732adc-eefe-4b2c-b528-acdc6bd2f1c5");
+    define("NAVITIA_URL", "https://".NAVITIA_TOKEN."@api.navitia.io/v1/");
 
     /**
      * Fonction permettant d'afficher les prochains départ en gare
@@ -9,7 +11,7 @@
      * @return res la liste non ordonnée de tous les prochains départs
      */
     function afficherProchainsDeparts(string $id):string {
-        $url = URL."coverage/sncf/stop_areas/".$id."/departures";
+        $url = NAVITIA_URL."coverage/fr-idf/stop_areas/".$id."/departures";
 
         $fluxjson = file_get_contents($url);
         $res = "<ul>\n";
@@ -55,7 +57,7 @@
      */
     function listeGaresSimilaires(string $recherche, string $var):string {
         // On récupère le flux JSON correspondant aux informations relatives à notre recherche
-        $url = URL."/coverage/sncf/places?q=".urlencode($recherche);                   
+        $url = NAVITIA_URL."coverage/fr-idf/places?q=".urlencode($recherche);                   
         $fluxjson = file_get_contents($url);
 
         $res = "<h3>Résultats de la recherche pour '$recherche'</h3>\n";
@@ -67,14 +69,25 @@
             $donnees = json_decode($fluxjson, true);
             // On parcourt chaque endroit reconnu
             if(isset($donnees['places'])) {
-                foreach ($donnees['places'] as $place) {
-                    // L'identifiant uic est sous la forme XX:XXX:00000000, on récupère la partie numéraire 00000000
-                    $decoupe = explode(':', $place['id']);
-                    $partie_numeraire = $decoupe[2];
-                    // Si la partie numéraire de l'identifiant UIC de l'endroit sélectionné commence par 87, alors c'est une gare ferroviaire, on l'affiche dans les suggestions
-                    // On ajoute l'item de liste associé, le lien hypertexte permettra d'entrer l'identifiant en paramètre id sur la page
-                    if(strpos($partie_numeraire, "87") === 0){
-                        $res .= "\t\t\t\t\t\t<li><a href=\"?".$var."=".$place['id']."\">".$place['name']."</a></li>\n";
+                foreach($donnees['places'] as $place) {
+                    if(isset($place['stop_area'])) {
+                        $stop_area = $place['stop_area'];
+                        if(isset($stop_area['commercial_modes'])) {
+                            // On parcourt tous les modes de transports disponibles à cette gare
+                            foreach($stop_area['commercial_modes'] as $commercial_mode){
+                                $estGareFerroviaire = false;
+                                // Si le mode de transport est RER ou Train Transilien
+                                if ($commercial_mode['name'] === 'Train Transilien' || $commercial_mode['name'] === 'RER') {
+                                    $estGareFerroviaire = true;
+                                }
+                                if($estGareFerroviaire) {
+                                    // On ajoute l'item de liste associé, le lien hypertexte permettra d'entrer l'identifiant en paramètre id sur la page
+                                    $res .= "\t\t\t\t\t\t<li><a href=\"?".$var."=".$place['id']."\">".$place['name']."</a></li>\n";
+                                    // On sort de la boucle
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -92,7 +105,7 @@
      */
     function afficherItineraire(string $id, string $id2):string {
         // On récupère le flux JSON correspondant aux informations relatives à notre recherche
-        $url = URL."/coverage/sncf/journeys?from=".$id."&to=".$id2;
+        $url = NAVITIA_URL."coverage/fr-idf/journeys?from=".$id."&to=".$id2;
         $fluxjson = file_get_contents($url);
 
         $res = "\t\t\t<h3>Meilleur itinéraire trouvé :</h3>\n";

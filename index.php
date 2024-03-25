@@ -1,9 +1,9 @@
 <?php
-$title = "Projet de développement web";
-$desc = "Projet de développement web";
+$title = "CityTapeur";
+$desc = "Aide à la mobilité intra-muros";
 $keywords = "PHP, Université, Projet";
-$update_date = "01/03/2024";
-$update_hour = "21:17";
+$update_date = "25/03/2024";
+$update_hour = "15:23";
 require "./include/functionsSNCF.inc.php";
 require "./include/header.inc.php";
 
@@ -24,17 +24,17 @@ require "./include/header.inc.php";
         <article id="recherchegare">
             <h3>Formulaire à remplir</h3>
             <form action="index.php" method="get" target="_self">
-                <label for="depart">Gare de départ : </label>
+                <label for="depart">Gare ferroviaire de départ : </label>
                 <input type="search" id="depart" name="depart" placeholder="Entrez la gare de départ" <?php echo isset($_GET['id']) ? "disabled='disabled'" : "required='required'" ?>/>
                 <fieldset>
                     <legend>Sélectionnez une option</legend>
                     <span class="form">
                         <input type="radio" id="departs" name="option" value="departs" <?php echo $selectedOption == 'departs' ? 'checked="checked"' : ''; ?> required="required" />
-                        <label for="departs">Afficher les prochains départs depuis la gare de départ</label>
+                        <label for="departs">Afficher les prochains départs de trains depuis la gare de départ</label>
                     </span>
                     <span class="form">
                         <input type="radio" id="itineraire" name="option" value="itineraire" <?php echo $selectedOption == 'itineraire' ? 'checked="checked"' : ''; ?> />
-                        <label for="itineraire">Afficher l'itinéraire entre la gare de départ et une autre gare</label>
+                        <label for="itineraire">Afficher l'itinéraire (tous modes) entre la gare de départ et une autre gare</label>
                     </span>
                 </fieldset>
                 <button type="submit">Rechercher</button>
