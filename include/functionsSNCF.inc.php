@@ -6,6 +6,18 @@
     define("NAVITIA_URL", "https://".NAVITIA_TOKEN."@api.navitia.io/v1/");
 
     /**
+     * Fonction créant le svg du logo de la ligne de transport
+     * @param label le nom de la ligne de transport
+     * @param color la couleur de la ligne de transport
+     * @return svg le code svg du logo
+     */
+    function creerLogoSvg(string $label, string $color):string {
+        $svg = "<svg width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"12\" fill=\"#".$color."\" /><text x=\"50%\" y=\"55%\" text-anchor=\"middle\" fill=\"black\" font-size=\"10\" font-family=\"Arial\" dy=\".3em\">".$label."</text></svg>";
+        return $svg;
+      
+    }
+
+    /**
      * Fonction permettant d'afficher les prochains départ en gare
      * @param id l'identifiant de la gare
      * @return res la liste non ordonnée de tous les prochains départs
@@ -21,7 +33,7 @@
             // On parcourt chaque prochain départ en gare (il y en a 10 à la fois dans le flux JSON)
             foreach($donnees['departures'] as $departure) {
                 $heureDeDepart = explode(" ", decodeTemps($departure['stop_date_time']['departure_date_time']))[1];
-                $res .= "\t\t\t\t\t\t<li>Prochain départ à destination de : ".$departure['display_informations']['direction']." à ".$heureDeDepart." (".$departure['display_informations']['physical_mode'].")</li>\n";
+                $res .= "\t\t\t\t\t\t<li>Prochain départ à destination de : ".$departure['display_informations']['direction']." à ".$heureDeDepart." (".$departure['display_informations']['physical_mode'].")".creerLogoSvg($departure['display_informations']['label'], $departure['display_informations']['color'])."</li>\n";
             }
         }
 
@@ -61,7 +73,7 @@
         $fluxjson = file_get_contents($url);
 
         $res = "<h3>Résultats de la recherche pour '$recherche'</h3>\n";
-        $res .= "\t\t\t\t\t<ul>\n";
+        $res .= "\t\t\t<ul>\n";
 
         // Si le flux n'est pas vide
         if ($fluxjson !== false) {
@@ -72,7 +84,7 @@
                 foreach($donnees['places'] as $place) {
                     // Si cet endroit est un arrêt de transport
                     if(isset($place['stop_area'])) {
-                        $res .= "<li> <a href=\"?".$var."=".$place['id']."\">".$place['name'];
+                        $res .= "\t\t\t\t<li> <a href=\"?".$var."=".$place['id']."\">".$place['name'];
                         $stop_area = $place['stop_area'];
                         // Si cet endroit propose des modes de transport
                         if(isset($stop_area['commercial_modes'])) {
@@ -89,8 +101,8 @@
             }
         }
 
-        $res .= "\t\t\t\t\t</ul>\n";
-        $res .= "\t\t\t\t\t<a href=\"index.php\" style=\"display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;\">Retour</a>\n";
+        $res .= "\t\t\t</ul>\n";
+        $res .= "\t\t\t<a href=\"index.php\" style=\"display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;\">Retour</a>\n";
         return $res;
     }
 
