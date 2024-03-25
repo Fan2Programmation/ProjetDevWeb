@@ -21,7 +21,7 @@
             // On parcourt chaque prochain départ en gare (il y en a 10 à la fois dans le flux JSON)
             foreach($donnees['departures'] as $departure) {
                 $heureDeDepart = explode(" ", decodeTemps($departure['stop_date_time']['departure_date_time']))[1];
-                $res .= "\t\t\t\t\t\t<li>Prochain départ à destination de : ".$departure['display_informations']['direction']." à ".$heureDeDepart."</li>\n";
+                $res .= "\t\t\t\t\t\t<li>Prochain départ à destination de : ".$departure['display_informations']['direction']." à ".$heureDeDepart." (".$departure['display_informations']['physical_mode'].")</li>\n";
             }
         }
 
@@ -70,30 +70,27 @@
             // On parcourt chaque endroit reconnu
             if(isset($donnees['places'])) {
                 foreach($donnees['places'] as $place) {
+                    // Si cet endroit est un arrêt de transport
                     if(isset($place['stop_area'])) {
+                        $res .= "<li> <a href=\"?".$var."=".$place['id']."\">".$place['name'];
                         $stop_area = $place['stop_area'];
+                        // Si cet endroit propose des modes de transport
                         if(isset($stop_area['commercial_modes'])) {
+                            $res .= " - (";
                             // On parcourt tous les modes de transports disponibles à cette gare
                             foreach($stop_area['commercial_modes'] as $commercial_mode){
-                                $estGareFerroviaire = false;
-                                // Si le mode de transport est RER ou Train Transilien
-                                if ($commercial_mode['name'] === 'Train Transilien' || $commercial_mode['name'] === 'RER') {
-                                    $estGareFerroviaire = true;
-                                }
-                                if($estGareFerroviaire) {
-                                    // On ajoute l'item de liste associé, le lien hypertexte permettra d'entrer l'identifiant en paramètre id sur la page
-                                    $res .= "\t\t\t\t\t\t<li><a href=\"?".$var."=".$place['id']."\">".$place['name']."</a></li>\n";
-                                    // On sort de la boucle
-                                    break;
-                                }
+                                $res .= " ".explode(" ",$commercial_mode['name'])[0]." ";
                             }
+                            $res .= ")";
                         }
+                        $res .= "</a></li>\n";
                     }
                 }
             }
         }
 
         $res .= "\t\t\t\t\t</ul>\n";
+        $res .= "\t\t\t\t\t<a href=\"index.php\" style=\"display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;\">Retour</a>\n";
         return $res;
     }
 

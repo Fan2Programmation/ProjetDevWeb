@@ -24,13 +24,13 @@ require "./include/header.inc.php";
         <article id="recherchegare">
             <h3>Formulaire à remplir</h3>
             <form action="index.php" method="get" target="_self">
-                <label for="depart">Gare ferroviaire de départ : </label>
+                <label for="depart">Arrêt de départ : </label>
                 <input type="search" id="depart" name="depart" placeholder="Entrez la gare de départ" <?php echo isset($_GET['id']) ? "disabled='disabled'" : "required='required'" ?>/>
                 <fieldset>
                     <legend>Sélectionnez une option</legend>
                     <span class="form">
                         <input type="radio" id="departs" name="option" value="departs" <?php echo $selectedOption == 'departs' ? 'checked="checked"' : ''; ?> required="required" />
-                        <label for="departs">Afficher les prochains départs de trains depuis la gare de départ</label>
+                        <label for="departs">Afficher les prochains départs depuis cet arrêt</label>
                     </span>
                     <span class="form">
                         <input type="radio" id="itineraire" name="option" value="itineraire" <?php echo $selectedOption == 'itineraire' ? 'checked="checked"' : ''; ?> />
