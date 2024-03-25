@@ -29,8 +29,12 @@ a:hover {
     text-decoration: underline;
 }
 
-h1, h2, h3 {
+h1 {
     color: #fff;
+}
+
+h2, h3 {
+    color: var(--gris-foncé);
 }
 
 .btn-primary {
