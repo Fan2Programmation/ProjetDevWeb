@@ -24,7 +24,7 @@ require "./include/header.inc.php";
         <article id="recherchegare">
             <h3>Formulaire à remplir</h3>
             <form action="index.php" method="get" target="_self">
-                <label for="depart">Arrêt de départ : </label>
+                <label for="depart">Gare de départ : </label>
                 <input type="search" id="depart" name="depart" placeholder="Entrez la gare de départ" <?php echo isset($_GET['id']) ? "disabled='disabled'" : "required='required'" ?>/>
                 <fieldset>
                     <legend>Sélectionnez une option</legend>
