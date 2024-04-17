@@ -1,0 +1,200 @@
+/* Palette de couleurs */
+:root {
+    --bleu-sncf: #003B80; 
+    --bleu-clair: #0072CE;
+    --gris-clair: #F4F4F4;
+    --gris-foncé: #5F6977;
+    --rouge-alerte: #E2001A;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: var(--gris-foncé);
+    background-color: #fff;
+}
+
+a {
+    color: var(--bleu-sncf);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    color: #fff;
+}
+
+h2, h3 {
+    color: var(--gris-foncé);
+}
+
+.btn-primary {
+    background-color: var(--bleu-sncf);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--bleu-clair);
+}
+
+.btn-secondary {
+    background-color: var(--gris-clair);
+    color: var(--gris-foncé);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--gris-foncé);
+    color: #fff;
+}
+
+footer {
+    background-color: var(--bleu-sncf);
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+.navbar {
+    background-color: var(--bleu-sncf);
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.nav-link {
+    color: #fff;
+    margin-right: 15px;
+}
+
+.nav-link:hover {
+    color: var(--bleu-clair);
+}
+
+input, select {
+    border: 1px solid var(--gris-clair);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+input:focus, select:focus {
+    border-color: var(--bleu-sncf);
+}
+
+
+header {
+    background-color: var(--bleu-sncf);
+    color: #fff;
+    padding: 20px;
+    margin-top: -20px;
+}
+
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-item {
+    margin-left: 20px;
+}
+
+p {
+    line-height: 1.6; 
+}
+
+.form {
+    display: block;
+}
+
+section, article {
+    margin: 20px auto;
+    padding: 30px;
+    max-width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+section {
+    border-top: 4px solid var(--bleu-clair);
+}
+
+article {
+    border-left: 4px solid var(--rouge-alerte);
+}
+
+section h2, article h2 {
+    color: var(--bleu-sncf);
+}
+
+article img {
+    max-width: 100%; 
+    height: auto; 
+    margin: 20px 0; 
+}
+
+ul {
+    list-style-type: none; /* Enlève les puces */
+    margin-left: 0; /* Enlève la marge par défaut si nécessaire */
+    position: relative;
+}
+
+section {
+    position: relative; /* Positionnement relatif */
+}
+
+.logo {
+    position: absolute; /* Positionnement absolu */
+    left: -15px;
+    top: 42%;
+}
+
+header {
+    display: flex; /* Utilisation de Flexbox pour le placement */
+    align-items: center; /* Centre les éléments verticalement */
+    justify-content: space-between; /* Répartit l'espace entre et autour des éléments de contenu */
+}
+
+header h1 {
+    margin: 0; /* Retire la marge par défaut du h1 pour un meilleur contrôle */
+    padding: 10px; /* Ajoute un peu de padding autour du titre */
+}
+
+aside {
+    position: relative;
+    top: 0px;
+    right: 660px;
+    z-index: 9999; /* Assurez-vous que l'image reste au-dessus de tous les autres Ã©lÃ©ments */
+}
+
+#viewmode {
+    position: absolute;
+    top: 0px;
+    right: 120px;
+    z-index: 9999; /* Assurez-vous que l'image reste au-dessus de tous les autres Ã©lÃ©ments */
+}
