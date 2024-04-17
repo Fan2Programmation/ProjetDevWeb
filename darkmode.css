@@ -108,12 +108,6 @@ header {
     margin-top: -20px;
 }
 
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
 .navbar {
     list-style-type: none;
     margin: 0;
@@ -167,12 +161,6 @@ ul {
 
 section {
     position: relative; /* Positionnement relatif */
-}
-
-.logo {
-    position: absolute; /* Positionnement absolu */
-    left: -15px;
-    top: 42%;
 }
 
 header {
