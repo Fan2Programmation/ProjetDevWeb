@@ -6,16 +6,37 @@
     define("NAVITIA_URL", "https://".NAVITIA_TOKEN."@api.navitia.io/v1/");
 
     /**
+     * Fonction déterminant si une couleur fournie est "claire" ou "sombre" (source : https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color)
+     * @param color la couleur en héxadécimal
+     * @return isColorLight le booléen, vrai si la couleur est claire, faux si sombre
+     */
+    function isColorLight($color) {
+        // On récupère la valeur héxadécimale des 3 couleurs primaires qu'on convertit en décimal
+        $r = hexdec(substr($color, 1, 2));
+        $g = hexdec(substr($color, 3, 2));
+        $b = hexdec(substr($color, 5, 2));
+    
+        // Calcul de la luminosité selon la formule
+        $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
+        return $luminance > 0.5; // Retourne true si la couleur est claire
+    }
+    
+
+    /**
      * Fonction créant le svg du logo de la ligne de transport
      * @param label le nom de la ligne de transport
      * @param color la couleur de la ligne de transport
      * @return svg le code svg du logo
      */
-    function creerLogoSvg(string $label, string $color):string {
-        $svg = "<svg width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"12\" fill=\"#".$color."\" /><text x=\"50%\" y=\"55%\" text-anchor=\"middle\" fill=\"black\" font-size=\"10\" font-family=\"Arial\" dy=\".3em\">".$label."</text></svg>";
+    function creerLogoSvg(string $label, string $color): string {
+        $textColor = isColorLight($color) ? 'black' : 'white'; // Choix de la couleur du texte
+        $svg = "<svg width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\">
+                    <circle cx=\"12\" cy=\"12\" r=\"12\" fill=\"#{$color}\" />
+                    <text x=\"50%\" y=\"55%\" text-anchor=\"middle\" fill=\"{$textColor}\" font-size=\"10\" font-family=\"Arial\" dy=\".3em\">{$label}</text>
+                </svg>";
         return $svg;
-      
     }
+    
 
     /**
      * Fonction permettant d'afficher les prochains départ en gare
