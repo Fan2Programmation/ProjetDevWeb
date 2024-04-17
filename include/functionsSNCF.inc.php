@@ -4,43 +4,28 @@
     define("SNCF_URL", "https://".SNCF_TOKEN."@api.sncf.com/v1/");
     define("NAVITIA_TOKEN", "e4732adc-eefe-4b2c-b528-acdc6bd2f1c5");
     define("NAVITIA_URL", "https://".NAVITIA_TOKEN."@api.navitia.io/v1/");
-
-    /**
-     * Fonction déterminant si une couleur fournie est "claire" ou "sombre" (source : https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color)
-     * @param color la couleur en héxadécimal
-     * @return isColorLight le booléen, vrai si la couleur est claire, faux si sombre
-     */
-    function isColorLight($color) {
-        // On récupère la valeur héxadécimale des 3 couleurs primaires qu'on convertit en décimal
-        $r = hexdec(substr($color, 1, 2));
-        $g = hexdec(substr($color, 3, 2));
-        $b = hexdec(substr($color, 5, 2));
-    
-        // Calcul de la luminosité selon la formule
-        $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
-        return $luminance > 0.5; // Retourne true si la couleur est claire
-    }
-    
+  
 
     /**
      * Fonction créant le svg du logo de la ligne de transport
      * @param label le nom de la ligne de transport
      * @param color la couleur de la ligne de transport
+     * @param textColor la couleur du texte
      * @return svg le code svg du logo
      */
-    function creerLogoSvg(string $label, string $color): string {
-        $textColor = isColorLight($color) ? 'black' : 'white';
-        $fontSize = 10; // Taille de police par défaut
+    function creerLogoSvg(string $label, string $color, string $textColor): string {
+        $fontSize = 15; // Taille de police par défaut
+        $minimumFontSize = 5;
         $maxLength = 3; // Nombre maximal de caractères sans ajustement de la taille
     
         // Ajuster la taille de la police en fonction de la longueur du label
         if (strlen($label) > $maxLength) {
-            $fontSize = max(10 - (strlen($label) - $maxLength), 5); // Réduire la taille de la police pour les longs textes
+            $fontSize = max($fontSize - (strlen($label) - $maxLength), $minimumFontSize); // Réduire la taille de la police pour les longs textes
         }
     
         $svg = "<svg width=\"40\" height=\"40\" xmlns=\"http://www.w3.org/2000/svg\" style=\"vertical-align: middle;\">
                     <circle cx=\"20\" cy=\"20\" r=\"18\" fill=\"#{$color}\" />
-                    <text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"{$textColor}\" font-size=\"{$fontSize}px\" font-family=\"Arial\" dy=\".3em\">{$label}</text>
+                    <text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"#{$textColor}\" font-size=\"{$fontSize}px\" font-family=\"Arial\" dy=\".3em\">{$label}</text>
                 </svg>";
         return $svg;
     }    
@@ -63,7 +48,7 @@
             // On parcourt chaque prochain départ en gare (il y en a 10 à la fois dans le flux JSON)
             foreach($donnees['departures'] as $departure) {
                 $heureDeDepart = explode(" ", decodeTemps($departure['stop_date_time']['departure_date_time']))[1];
-                $res .= "\t\t\t\t\t\t<li>Prochain départ à destination de : ".$departure['display_informations']['direction']." à ".$heureDeDepart." (".$departure['display_informations']['physical_mode'].")".creerLogoSvg($departure['display_informations']['label'], $departure['display_informations']['color'])."</li>\n";
+                $res .= "\t\t\t\t\t\t<li>".creerLogoSvg($departure['display_informations']['label'], $departure['display_informations']['color'],$departure['display_informations']['text_color'])." Prochain départ à destination de : ".$departure['display_informations']['direction']." à ".$heureDeDepart." (".$departure['display_informations']['physical_mode'].")</li>\n";
             }
         }
 
@@ -148,7 +133,6 @@
         $fluxjson = file_get_contents($url);
 
         $res = "\t\t\t<h3>Meilleur itinéraire trouvé :</h3>\n";
-        $res .= "\t\t\t<ul>\n";
 
         // Si le flux n'est pas vide
         if ($fluxjson !== false) {
@@ -164,16 +148,33 @@
                             foreach($journey['sections'] as $section) {
                                 // Pour les sections correspondantes à un transport en commun, afficher les arrêts intermédiaires
                                 if ($section['type'] === "public_transport" && isset($section['stop_date_times'])) {
+                                    $color = $section['display_informations']['color'];
+                                    $textColor = $section['display_informations']['text_color'];
+                                    $label = $section['display_informations']['label'];
+                                    $lineName = $section['display_informations']['name'];
+                                
+                                    // Vous pouvez maintenant utiliser ces valeurs pour personnaliser l'affichage ou le traitement
+                                    echo "La ligne " . $label . " (" . $lineName . ") utilise la couleur #" . $color . " avec une couleur de texte #" . $textColor . ".<br>";
+
+                                    // Chaque section de transport en commun fera l'objet d'une liste d'arrêts
+                                    $res .= "\t\t\t<ul>\n";
                                     // On parcourt tous les arrêts de la section de transport en commun
                                     foreach ($section['stop_date_times'] as $stop) {
                                         // On ajoute le nom de l'arrêt à notre liste non triée
                                         $res .= "\t\t\t\t<li>".$stop['stop_point']['name']."</li>\n";
                                     }
+                                    $res .= "\t\t\t</ul>\n"; // On referme la liste d'arrêts
                                 }
                                 // Pour les sections correspondantes à un changement (qualifié par "waiting")
                                 else if ($section['type'] === "waiting") {
-                                    // On notifie un changement dans notre liste en ajoutant un élement vide
-                                    $res .= "\t\t\t\t<li></li>\n";
+                                    // On affiche le temps du changement
+                                    $waitTime = $section['duration'];
+                                    // On divise toutes ces secondes par 60 pour avoir les minutes
+                                    $minutes = intdiv($waitTime, 60);
+                                    // Le reste de la division sont les secondes restantes
+                                    $seconds = $waitTime % 60;
+                                    $formattedTime = $minutes . " min " . $seconds . " sec";
+                                    $res .= "\t\t\t<p>Temps d'attente: " . $formattedTime . "</p>\n";
                                 }
                             }
                         }

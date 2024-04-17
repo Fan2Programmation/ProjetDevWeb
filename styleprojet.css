@@ -157,3 +157,7 @@ article img {
 .form {
     display: block;
 }
+
+ul {
+    list-style-type: none; /* On enlève les puces des listes à puce */
+}
