@@ -40,7 +40,7 @@
 </head>
 <body>
     <header>
-        <h1>CityTapeur</h1>
+        <a href="index.php"><img src="./images/logo.png" alt="CityTapeur"/></a>
         <aside><?php randomImage(); ?></aside>
         <form id="viewmode" method="post">
             <input type="hidden" name="theme" value="<?php echo $otherTheme; ?>">
