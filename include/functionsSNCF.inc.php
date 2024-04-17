@@ -24,7 +24,7 @@
             $fontSize = max($fontSize - (strlen($label) - $maxLength), $minimumFontSize); // Réduire la taille de la police pour les longs textes
         }
     
-        $svg = "<span class=\"logo\"><svg width=\"40\" height=\"40\" xmlns=\"http://www.w3.org/2000/svg\" style=\"vertical-align: middle;\"><circle cx=\"20\" cy=\"20\" r=\"18\" fill=\"#{$color}\" /><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"#{$textColor}\" font-size=\"{$fontSize}px\" font-family=\"Arial\" dy=\".3em\">{$label}</text></svg></span>";
+        $svg = "<svg width=\"40\" height=\"40\" xmlns=\"http://www.w3.org/2000/svg\" style=\"vertical-align: middle;\"><circle cx=\"20\" cy=\"20\" r=\"18\" fill=\"#{$color}\" /><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"#{$textColor}\" font-size=\"{$fontSize}px\" font-family=\"Arial\" dy=\".3em\">{$label}</text></svg>";
         return $svg;
     }    
     
