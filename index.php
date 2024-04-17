@@ -20,7 +20,7 @@ require "./include/header.inc.php";
 
 <main>
     <section>
-        <h2>Aide à la mobilité</h2>
+        <h2>Aide à la mobilité en Île-De-France</h2>
         <article id="recherchegare">
             <h3>Formulaire à remplir</h3>
             <form action="index.php" method="get" target="_self">
