@@ -1,14 +1,17 @@
 <?php
     require "./include/functions.inc.php";
 
-    // A améliorer : garder les paramètres GET après le POST
-
     // Définir ou changer le mode (dark ou light)
     if (isset($_POST['theme'])) { // Vérifie si le formulaire a été soumis via l'image
         $theme = $_POST['theme'];
         setcookie('theme', $theme, time() + 86400 * 30, '/'); // Expire dans 30 jours
         $_COOKIE['theme'] = $theme; // Mise à jour immédiate de la variable $_COOKIE
-        header("Location: " . $_SERVER['PHP_SELF']); // Rafraîchit la page pour prendre en compte le nouveau thème
+
+        // Construire la query string à partir des paramètres GET actuels pour les inclure dans la redirection
+        $queryString = http_build_query($_GET);
+
+        // Rediriger vers la même page avec les paramètres GET conservés
+        header("Location: " . $_SERVER['PHP_SELF'] . '?' . $queryString);
         exit;
     }
 
