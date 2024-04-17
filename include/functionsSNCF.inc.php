@@ -29,13 +29,22 @@
      * @return svg le code svg du logo
      */
     function creerLogoSvg(string $label, string $color): string {
-        $textColor = isColorLight($color) ? 'black' : 'white'; // Choix de la couleur du texte
-        $svg = "<svg width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\">
-                    <circle cx=\"12\" cy=\"12\" r=\"12\" fill=\"#{$color}\" />
-                    <text x=\"50%\" y=\"55%\" text-anchor=\"middle\" fill=\"{$textColor}\" font-size=\"10\" font-family=\"Arial\" dy=\".3em\">{$label}</text>
+        $textColor = isColorLight($color) ? 'black' : 'white';
+        $fontSize = 10; // Taille de police par défaut
+        $maxLength = 3; // Nombre maximal de caractères sans ajustement de la taille
+    
+        // Ajuster la taille de la police en fonction de la longueur du label
+        if (strlen($label) > $maxLength) {
+            $fontSize = max(10 - (strlen($label) - $maxLength), 5); // Réduire la taille de la police pour les longs textes
+        }
+    
+        $svg = "<svg width=\"40\" height=\"40\" xmlns=\"http://www.w3.org/2000/svg\" style=\"vertical-align: middle;\">
+                    <circle cx=\"20\" cy=\"20\" r=\"18\" fill=\"#{$color}\" />
+                    <text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"{$textColor}\" font-size=\"{$fontSize}px\" font-family=\"Arial\" dy=\".3em\">{$label}</text>
                 </svg>";
         return $svg;
-    }
+    }    
+    
     
 
     /**
