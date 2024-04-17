@@ -1,3 +1,6 @@
+<?php
+    require "./include/functions.inc.php";
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -15,4 +18,5 @@
         <header>
             <!--Titre du site-->
             <h1>CityTapeur</h1>
+            <aside><?php randomImage() ?></aside>
         </header>

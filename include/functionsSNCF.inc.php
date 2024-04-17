@@ -4,7 +4,7 @@
     define("SNCF_URL", "https://".SNCF_TOKEN."@api.sncf.com/v1/");
     define("NAVITIA_TOKEN", "e4732adc-eefe-4b2c-b528-acdc6bd2f1c5");
     define("NAVITIA_URL", "https://".NAVITIA_TOKEN."@api.navitia.io/v1/");
-  
+    // Idée: Heure de départ / Heure d'arrivée que l'utilisateur rentre dans le calcul d'itinéraire
 
     /**
      * Fonction créant le svg du logo de la ligne de transport
