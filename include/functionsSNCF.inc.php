@@ -11,7 +11,7 @@
      * @param label le nom de la ligne de transport
      * @param color la couleur de la ligne de transport
      * @param textColor la couleur du texte
-     * @return svg le code svg du logo
+     * @return svg le code svg du logo englobé dans un span de classe "logo"
      */
     function creerLogoSvg(string $label, string $color, string $textColor): string {
         $fontSize = 15; // Taille de police par défaut
@@ -23,10 +23,7 @@
             $fontSize = max($fontSize - (strlen($label) - $maxLength), $minimumFontSize); // Réduire la taille de la police pour les longs textes
         }
     
-        $svg = "<svg width=\"40\" height=\"40\" xmlns=\"http://www.w3.org/2000/svg\" style=\"vertical-align: middle;\">
-                    <circle cx=\"20\" cy=\"20\" r=\"18\" fill=\"#{$color}\" />
-                    <text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"#{$textColor}\" font-size=\"{$fontSize}px\" font-family=\"Arial\" dy=\".3em\">{$label}</text>
-                </svg>";
+        $svg = "<span class=\"logo\"><svg width=\"40\" height=\"40\" xmlns=\"http://www.w3.org/2000/svg\" style=\"vertical-align: middle;\"><circle cx=\"20\" cy=\"20\" r=\"18\" fill=\"#{$color}\" /><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"#{$textColor}\" font-size=\"{$fontSize}px\" font-family=\"Arial\" dy=\".3em\">{$label}</text></svg></span>";
         return $svg;
     }    
     
@@ -148,33 +145,47 @@
                             foreach($journey['sections'] as $section) {
                                 // Pour les sections correspondantes à un transport en commun, afficher les arrêts intermédiaires
                                 if ($section['type'] === "public_transport" && isset($section['stop_date_times'])) {
+
+                                    $res .= "\t\t\t<section id=\"".$label = $section['display_informations']['label']."\">\n";
+
+                                    // Récupération des temps de départ et d'arrivée pour la section
+                                    $departure = DateTime::createFromFormat('Ymd\THis', $section['departure_date_time']);
+                                    $arrival = DateTime::createFromFormat('Ymd\THis', $section['arrival_date_time']);
+                                    $departureTime = $departure->format('H:i');
+                                    $arrivalTime = $arrival->format('H:i');
+                                    
+                                    // On récupère la infos de la ligne de transport
+                                    $label = $section['display_informations']['label'];
                                     $color = $section['display_informations']['color'];
                                     $textColor = $section['display_informations']['text_color'];
-                                    $label = $section['display_informations']['label'];
-                                    $lineName = $section['display_informations']['name'];
-                                
-                                    // Vous pouvez maintenant utiliser ces valeurs pour personnaliser l'affichage ou le traitement
-                                    echo "La ligne " . $label . " (" . $lineName . ") utilise la couleur #" . $color . " avec une couleur de texte #" . $textColor . ".<br>";
+
+                                    $res .= "\t\t\t\t".creerLogoSvg($label, $color, $textColor)." <p><strong>Départ : </strong>".$departureTime."</p>\n";
 
                                     // Chaque section de transport en commun fera l'objet d'une liste d'arrêts
-                                    $res .= "\t\t\t<ul>\n";
+                                    $res .= "\t\t\t\t<ul style=\"border-left: 10px solid #{$color}; padding-left: 20px;\">\n";
+
                                     // On parcourt tous les arrêts de la section de transport en commun
                                     foreach ($section['stop_date_times'] as $stop) {
                                         // On ajoute le nom de l'arrêt à notre liste non triée
-                                        $res .= "\t\t\t\t<li>".$stop['stop_point']['name']."</li>\n";
+                                        $res .= "\t\t\t\t\t<li>".$stop['stop_point']['name']."</li>\n";
                                     }
-                                    $res .= "\t\t\t</ul>\n"; // On referme la liste d'arrêts
+
+                                    $res .= "\t\t\t\t</ul>\n"; // On referme la liste d'arrêts
+
+                                    $res .= "\t\t\t\t<p><strong>Arrivée : </strong>".$arrivalTime."</p>\n";
+
+                                    $res .= "\t\t\t</section>\n";
                                 }
                                 // Pour les sections correspondantes à un changement (qualifié par "waiting")
                                 else if ($section['type'] === "waiting") {
                                     // On affiche le temps du changement
-                                    $waitTime = $section['duration'];
+                                    $changeTime = $section['duration'];
                                     // On divise toutes ces secondes par 60 pour avoir les minutes
-                                    $minutes = intdiv($waitTime, 60);
+                                    $minutes = intdiv($changeTime, 60);
                                     // Le reste de la division sont les secondes restantes
-                                    $seconds = $waitTime % 60;
+                                    $seconds = $changeTime % 60;
                                     $formattedTime = $minutes . " min " . $seconds . " sec";
-                                    $res .= "\t\t\t<p>Temps d'attente: " . $formattedTime . "</p>\n";
+                                    $res .= "\t\t\t<p><strong>Temps du changement: </strong>" . $formattedTime . "</p>\n";
                                 }
                             }
                         }
@@ -183,7 +194,6 @@
             }
         }
 
-        $res .= "\t\t\t</ul>\n";
         $res .= "\t\t\t<a href=\"index.php\" style=\"display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;\">Retour</a>\n";
         return $res;
     }
