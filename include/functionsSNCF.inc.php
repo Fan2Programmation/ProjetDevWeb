@@ -228,7 +228,7 @@
     }
 
     /**
-     * Fonction permettant de stocker la gare consultée dans un fichier CSV
+     * Fonction permettant de stocker la gare consultée dans un fichier CSV et dans un COOKIE
      * @param id l'identifiant de la gare consultée
      */
     function stockerGareConsultee($id):void {
@@ -252,5 +252,24 @@
             // Fermer le fichier
             fclose($handle);
         }
+
+        // Stocker la gare consultée dans un cookie côté client
+        $cookieValue = $nomGare . '|' . date('Y-m-d H:i:s');
+        setcookie('derniereGareConsultee', $cookieValue, time() + (86400 * 30), "/"); // Le cookie expire après 30 jours
+    }
+
+    /**
+     * Fonction permettant d'afficher la dernière gare consultée
+     * @return res le code HTML de la dernière gare consultée
+     */
+    function derniereGareConsultee():string {
+        $res = "<h3>Dernière gare consultée</h3>\n";
+        if (isset($_COOKIE['derniereGareConsultee'])) {
+            $data = explode('|', $_COOKIE['derniereGareConsultee']);
+            $res .= "\t\t\t\t<p>".$data[0]." consultée le ".$data[1]."</p>\n";
+        } else {
+            $res .= "<p>Aucune gare consultée récemment</p>\n";
+        }
+        return $res;
     }
 ?>
