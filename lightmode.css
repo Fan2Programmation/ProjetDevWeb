@@ -20,6 +20,86 @@ body {
     background-color: #fff;
 }
 
+header {
+    background-color: var(--bleu-sncf);
+    padding: 20px;
+    margin-top: -20px;
+    display: flex; /* Utilisation de Flexbox pour le placement */
+    align-items: center; /* Centre les éléments verticalement */
+    justify-content: space-between; /* Répartit l'espace entre et autour des éléments de contenu */
+}
+
+footer {
+    background-color: var(--bleu-sncf);
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+
+section, article {
+    margin: 20px auto;
+    padding: 30px;
+    max-width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+section {
+    position:relative;
+    border-top: 4px solid var(--bleu-clair);
+}
+
+article {
+    border-left: 4px solid var(--rouge-alerte);
+}
+
+article img {
+    max-width: 100%; 
+    height: auto; 
+    margin: 20px 0; 
+}
+
+h1 {
+    color: var(--bleu-sncf);
+}
+
+h2 {
+    color: var(--rouge-alerte);
+}
+
+p {
+    line-height: 1.6; 
+}
+
+ul {
+    list-style-type: none; /* Enlève les puces */
+    margin-left: 0; /* Enlève la marge par défaut si nécessaire */
+    position: relative;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    left:250px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+
+nav ul li {
+    color:#333333;
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color:var(--rouge-alerte);
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+    left:5px;
+}
+
 a {
     color: var(--bleu-sncf);
     text-decoration: none;
@@ -27,14 +107,6 @@ a {
 
 a:hover {
     text-decoration: underline;
-}
-
-h1 {
-    color: var(--bleu-sncf);
-}
-
-h2, h3 {
-    color: var(--rouge-alerte);
 }
 
 .btn-primary {
@@ -66,28 +138,6 @@ h2, h3 {
     color: #fff;
 }
 
-footer {
-    background-color: var(--bleu-sncf);
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-}
-
-.navbar {
-    background-color: var(--bleu-sncf);
-    color: #fff;
-    padding: 10px 20px;
-}
-
-.nav-link {
-    color: #fff;
-    margin-right: 15px;
-}
-
-.nav-link:hover {
-    color: var(--bleu-clair);
-}
-
 input, select {
     border: 1px solid var(--gris-clair);
     padding: 10px;
@@ -99,84 +149,10 @@ input:focus, select:focus {
     border-color: var(--bleu-sncf);
 }
 
-
-header {
-    background-color: var(--bleu-sncf);
-    color: #fff;
-    padding: 20px;
-    margin-top: -20px;
-}
-
-.navbar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-.nav-item {
-    margin-left: 20px;
-}
-
-p {
-    line-height: 1.6; 
-}
-
-.form {
-    display: block;
-}
-
-section, article {
-    margin: 20px auto;
-    padding: 30px;
-    max-width: 1200px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-section {
-    border-top: 4px solid var(--bleu-clair);
-}
-
-article {
-    border-left: 4px solid var(--rouge-alerte);
-}
-
-section h2, article h2 {
-    color: var(--rouge-alerte);
-}
-
-article img {
-    max-width: 100%; 
-    height: auto; 
-    margin: 20px 0; 
-}
-
-ul {
-    list-style-type: none; /* Enlève les puces */
-    margin-left: 0; /* Enlève la marge par défaut si nécessaire */
-    position: relative;
-}
-
-section {
-    position: relative; /* Positionnement relatif */
-}
-
 .logo {
     position: absolute; /* Positionnement absolu */
     left: -15px;
     top: 42%;
-}
-
-header {
-    display: flex; /* Utilisation de Flexbox pour le placement */
-    align-items: center; /* Centre les éléments verticalement */
-    justify-content: space-between; /* Répartit l'espace entre et autour des éléments de contenu */
-}
-
-header h1 {
-    margin: 0; /* Retire la marge par défaut du h1 pour un meilleur contrôle */
-    padding: 10px; /* Ajoute un peu de padding autour du titre */
 }
 
 aside {
@@ -193,25 +169,6 @@ aside {
     z-index: 9999; /* Assurez-vous que l'image reste au-dessus de tous les autres Ã©lÃ©ments */
 }
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    left:250px;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    z-index: 1;
-}
-
-nav ul li {
-    color:#333333;
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
-    color:var(--rouge-alerte);
-    font-weight: bold;
-    font-size: 20px;
-    position: relative;
-    left:5px;
+.form {
+    display: block;
 }
