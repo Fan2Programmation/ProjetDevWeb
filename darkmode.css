@@ -182,3 +182,8 @@ aside {
 input::placeholder {
     color: white;
 }
+
+input {
+    background-color: var(--background);
+    color: white;
+}
