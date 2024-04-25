@@ -107,6 +107,10 @@ a {
     text-decoration: none;
 }
 
+article a {
+    color: var(--rouge-alerte);
+}
+
 a:hover {
     text-decoration: underline;
 }

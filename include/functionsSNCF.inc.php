@@ -8,10 +8,9 @@
     // TO-DO LIST
 
     // (Idée) Heure de départ / Heure d'arrivée que l'utilisateur rentre dans le calcul d'itinéraire
-    // Il faut que les gares rentrées restent dans les zones de formulaires
     // Documentation avec doxygen
-    // Stockage CSV des gares consultées + histogramme dans rubrique "statistiques"
-    // Dernière gare consultée cookie
+    // Trains et RER (mais pas bus ??)
+    // Améliorer CSS pour adaptabilité en fonction des écrans
     // Vidéo 3mn - PowerPoint (5 slides max) - Rapport (5 à 10 pages) - readme.md
 
     // Validateurs : HTML CSS ACCESSIBILITÉ ÉNÉRGÉTIQUE NOTFOUND FORBIDDEN
