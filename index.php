@@ -50,6 +50,7 @@ require "./include/header.inc.php";
                 // Si l'utilisateur à selectionné une gare de départ plus précise à partir des suggestions
                 if (isset($_GET['id'])) {
                     // On affiche les départs depuis cette gare
+                    stockerGareConsultee($_GET['id']);
                     echo afficherProchainsDeparts($_GET['id']);
                 }
             // Si l'option est d'afficher un itinéraire entre deux gares
@@ -76,6 +77,8 @@ require "./include/header.inc.php";
                 }
                 // Enfin si on a bien récupéré l'identifiant des deux gares voulues
                 if (isset($_GET['id']) && isset($_GET['id2'])) {
+                    stockerGareConsultee($_GET['id']);
+                    stockerGareConsultee($_GET['id2']);
                     echo afficherItineraire($_GET['id'], $_GET['id2']);
                 }
             }

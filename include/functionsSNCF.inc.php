@@ -226,4 +226,31 @@
         $res .= "\t\t\t<a href=\"index.php\" style=\"display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;\">Retour</a>\n";
         return $res;
     }
+
+    /**
+     * Fonction permettant de stocker la gare consultée dans un fichier CSV
+     * @param id l'identifiant de la gare consultée
+     */
+    function stockerGareConsultee($id):void {
+        // Récupérer le nom de la gare à partir de son identifiant
+        $nomGare = nomDeLaGare($id);
+
+        // Nom du fichier CSV
+        $fichier = 'gares_consultees.csv';
+    
+        // Ouvrir le fichier en mode append
+        $handle = fopen($fichier, 'a');
+    
+        // Vérifier si le fichier a été ouvert avec succès
+        if ($handle !== false) {
+            // Données à écrire dans le fichier CSV
+            $data = [$nomGare, date('Y-m-d H:i:s')];
+    
+            // Écrire les données dans le fichier CSV
+            fputcsv($handle, $data);
+    
+            // Fermer le fichier
+            fclose($handle);
+        }
+    }
 ?>
