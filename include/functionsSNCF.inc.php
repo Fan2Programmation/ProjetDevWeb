@@ -259,6 +259,19 @@
     }
 
     /**
+     * Fonction permettant de récupérer la dernière gare consultée à partir d'un COOKIE
+     * @return string la dernière gare consultée
+     */
+    function derniereGareConsultee():string {
+        if (isset($_COOKIE['derniereGareConsultee'])) {
+            $cookieValue = $_COOKIE['derniereGareConsultee'];
+            $data = explode('|', $cookieValue);
+            return "Dernière gare consultée : ".$data[0]." le ".$data[1];
+        }
+        return "Aucune gare consultée récemment";
+    }
+
+    /**
      * Fonction permettant de générer un histogramme des gares consultées et de l'enregistrer en tant qu'image PNG
      * Nécessite la bibliothèque JpGraph @see http://jpgraph.net/
      */
