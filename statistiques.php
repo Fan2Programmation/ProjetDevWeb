@@ -19,12 +19,14 @@ require "./include/header.inc.php";
 ?>
 
     <main>
-        <section>
-            <article id ="histogramme">
+        <section id="statistiques">
+            <h1>Statistiques</h1>
+            <article id ="statistiques">
+                <h2>Histogramme</h2>
                 <?php genererHistogramme(); ?>
                 <figure>
-                    <figcaption>Histogramme des gares consultées</figcaption>
                     <img src="./images/histogramme.png" alt="Histogramme des gares consultées">
+                    <figcaption>Figure 1 : Histogramme des gares consultées</figcaption>
                 </figure>
             </article>
         </section>

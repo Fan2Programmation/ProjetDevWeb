@@ -20,9 +20,9 @@ require "./include/header.inc.php";
 
     <main>
         <section>
-            <h2>Aide à la mobilité en Île-De-France</h2>
+            <h1>Aide à la mobilité en Île-De-France</h1>
             <article id="recherchegare">
-                <h3>Formulaire à remplir</h3>
+                <h2>Formulaire à remplir</h2>
                 <form action="index.php" method="get" target="_self">
                     <label for="depart">Gare de départ : </label>
                     <input type="search" id="depart" name="depart" placeholder="<?php  echo isset($_GET['id']) ? nomDeLaGare($_GET['id']) : "Entrez la gare de départ" ?>" <?php echo (isset($_GET['id']) || isset($_GET['depart'])) ? "disabled='disabled'" : "required='required'" ?>/>

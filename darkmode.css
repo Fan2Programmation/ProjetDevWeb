@@ -31,7 +31,7 @@ a:hover {
 }
 
 h1 {
-    color: var(--blanc);
+    color: var(--bleu-sncf);
 }
 
 h2, h3 {
@@ -144,7 +144,7 @@ article {
 }
 
 section h2, article h2 {
-    color: var(--bleu-sncf);
+    color: var(--rouge-alerte);
 }
 
 article img {
