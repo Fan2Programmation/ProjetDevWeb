@@ -296,7 +296,7 @@
         }
     
         // Créer le graphique
-        $graph = new Graph(800, 600); // Augmenter la taille de l'image
+        $graph = new Graph(800, 600);
         $graph->SetScale('textlin');
     
         // Ajouter les barres

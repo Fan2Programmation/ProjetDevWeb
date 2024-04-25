@@ -5,6 +5,7 @@
     --gris-clair: #dadada;
     --gris-foncé: #d4d4d4;
     --rouge-alerte: #fd5064;
+    --rouge-alerte2: #E2001A;
     --background: #333333;
 }
 
@@ -102,7 +103,7 @@ nav ul li a {
 }
 
 a {
-    color: var(--bleu-sncf);
+    color: var(--rouge-alerte2);
     text-decoration: none;
 }
 
