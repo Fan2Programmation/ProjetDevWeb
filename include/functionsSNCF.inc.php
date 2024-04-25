@@ -259,17 +259,50 @@
     }
 
     /**
-     * Fonction permettant d'afficher la dernière gare consultée
-     * @return res le code HTML de la dernière gare consultée
+     * Fonction permettant de générer un histogramme des gares consultées et de l'enregistrer en tant qu'image PNG
+     * Nécessite la bibliothèque JpGraph @see http://jpgraph.net/
      */
-    function derniereGareConsultee():string {
-        $res = "<h3>Dernière gare consultée</h3>\n";
-        if (isset($_COOKIE['derniereGareConsultee'])) {
-            $data = explode('|', $_COOKIE['derniereGareConsultee']);
-            $res .= "\t\t\t\t<p>".$data[0]." consultée le ".$data[1]."</p>\n";
-        } else {
-            $res .= "<p>Aucune gare consultée récemment</p>\n";
+    function genererHistogramme() {
+        require_once ('jpgraph-4.4.2/src/jpgraph.php');
+        require_once ('jpgraph-4.4.2/src/jpgraph_bar.php');
+    
+        $fichier = 'gares_consultees.csv';
+    
+        // Lire le fichier CSV et compter les consultations par gare
+        $gares = [];
+        if (($handle = fopen($fichier, 'r')) !== false) {
+            while (($data = fgetcsv($handle, 1000, ',')) !== false) {
+                $gare = $data[0];
+                if (isset($gares[$gare])) {
+                    $gares[$gare]++;
+                } else {
+                    $gares[$gare] = 1;
+                }
+            }
+            fclose($handle);
         }
-        return $res;
+    
+        // Créer le graphique
+        $graph = new Graph(800, 600); // Augmenter la taille de l'image
+        $graph->SetScale('textlin');
+    
+        // Ajouter les barres
+        $barPlot = new BarPlot(array_values($gares));
+        $graph->Add($barPlot);
+    
+        // Définir les légendes pour l'axe x
+        $graph->xaxis->SetTickLabels(array_keys($gares));
+    
+        // Faire pivoter les étiquettes de l'axe x de 45 degrés
+        $graph->xaxis->SetLabelAngle(45);
+    
+        // Utiliser une police TTF pour les étiquettes de l'axe x
+        $graph->xaxis->SetFont(FF_VERDANA, FS_NORMAL, 10);
+    
+        // Augmenter la marge inférieure du graphique
+        $graph->img->SetMargin(40, 40, 40, 200); // Les marges sont définies dans l'ordre suivant : gauche, droite, haut, bas
+    
+        // Enregistrer le graphique en tant que PNG
+        $graph->Stroke('./images/histogramme.png');
     }
 ?>

@@ -183,7 +183,7 @@ aside {
     position: relative;
     top: 0px;
     right: 660px;
-    z-index: 9999; /* Assurez-vous que l'image reste au-dessus de tous les autres Ã©lÃ©ments */
+    z-index: 0;
 }
 
 #viewmode {
@@ -191,4 +191,27 @@ aside {
     top: 0px;
     right: 120px;
     z-index: 9999; /* Assurez-vous que l'image reste au-dessus de tous les autres Ã©lÃ©ments */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    left:250px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+
+nav ul li {
+    color:#333333;
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color:var(--rouge-alerte);
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+    left:5px;
 }

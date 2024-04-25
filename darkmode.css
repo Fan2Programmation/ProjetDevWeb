@@ -160,34 +160,57 @@ ul {
 }
 
 section {
-    position: relative; /* Positionnement relatif */
+    position: relative;
 }
 
 header {
-    display: flex; /* Utilisation de Flexbox pour le placement */
-    align-items: center; /* Centre les éléments verticalement */
-    justify-content: space-between; /* Répartit l'espace entre et autour des éléments de contenu */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
 }
 
 header h1 {
-    margin: 0; /* Retire la marge par défaut du h1 pour un meilleur contrôle */
-    padding: 10px; /* Ajoute un peu de padding autour du titre */
+    margin: 0;
+    padding: 10px;
 }
 
 aside {
     position: relative;
     top: 0px;
     right: 660px;
-    z-index: 9999; /* Assurez-vous que l'image reste au-dessus de tous les autres Ã©lÃ©ments */
+    z-index: 0;
 }
 
 #viewmode {
     position: absolute;
     top: 0px;
     right: 120px;
-    z-index: 9999; /* Assurez-vous que l'image reste au-dessus de tous les autres Ã©lÃ©ments */
+    z-index: 9999;
 }
 
 input::placeholder {
-    color: #ccc; /* Remplacez #ccc par la couleur que vous voulez */
+    color: #ccc;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    left:250px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+
+nav ul li {
+    color:#333333;
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color:var(--rouge-alerte);
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+    left:5px;
 }

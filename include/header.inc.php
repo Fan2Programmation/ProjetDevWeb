@@ -41,6 +41,12 @@
 <body>
     <header>
         <a href="index.php"><img src="./images/logo.png" alt="CityTapeur"/></a>
+        <nav>
+            <ul>
+                <li><a href="index.php">Aide à la mobilité</a></li>
+                <li><a href="statistiques.php">Statistiques</a></li>
+            </ul>
+        </nav>
         <aside><?php randomImage(); ?></aside>
         <form id="viewmode" method="post">
             <input type="hidden" name="theme" value="<?php echo $otherTheme; ?>">
