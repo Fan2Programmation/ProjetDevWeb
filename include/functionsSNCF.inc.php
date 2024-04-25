@@ -13,6 +13,9 @@
     // Améliorer CSS pour adaptabilité en fonction des écrans
     // Vidéo 3mn - PowerPoint (5 slides max) - Rapport (5 à 10 pages) - readme.md
 
+    // redundant link index.php statistique.php et contraste avec le rouge
+    // https://wave.webaim.org/
+
     // Validateurs : HTML CSS ACCESSIBILITÉ ÉNÉRGÉTIQUE NOTFOUND FORBIDDEN
     // A mettre dans le projet : EMBEDDED
 
