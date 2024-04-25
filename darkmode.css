@@ -187,3 +187,7 @@ aside {
     right: 120px;
     z-index: 9999; /* Assurez-vous que l'image reste au-dessus de tous les autres Ã©lÃ©ments */
 }
+
+input::placeholder {
+    color: #ccc; /* Remplacez #ccc par la couleur que vous voulez */
+}

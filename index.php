@@ -25,7 +25,7 @@ require "./include/header.inc.php";
             <h3>Formulaire à remplir</h3>
             <form action="index.php" method="get" target="_self">
                 <label for="depart">Gare de départ : </label>
-                <input type="search" id="depart" name="depart" placeholder="Entrez la gare de départ" <?php echo isset($_GET['id']) ? "disabled='disabled'" : "required='required'" ?>/>
+                <input type="search" id="depart" name="depart" placeholder="<?php  echo isset($_GET['id']) ? nomDeLaGare($_GET['id']) : "Entrez la gare de départ" ?>" <?php echo (isset($_GET['id']) || isset($_GET['depart'])) ? "disabled='disabled'" : "required='required'" ?>/>
                 <fieldset>
                     <legend>Sélectionnez une option</legend>
                     <span class="form">
@@ -65,7 +65,7 @@ require "./include/header.inc.php";
                     echo "<form action=\"index.php\" method=\"get\" target=\"_self\">\n";
                     echo "\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"".$_GET['id']."\" />\n";
                     echo "\t\t\t\t<label for=\"arrivee\">Gare d'arrivée : </label>\n";
-                    echo "\t\t\t\t<input type=\"search\" id=\"arrivee\" name=\"arrivee\" placeholder=\"Entrez la gare d'arrivée\" ".(isset($_GET['id2']) ? "disabled='disabled'" : "")." required='required' />\n";
+                    echo "\t\t\t\t<input type=\"search\" id=\"arrivee\" name=\"arrivee\" placeholder=\"".(isset($_GET['id2']) ? nomDeLaGare($_GET['id2']) : "Entrez la gare d'arrivée")."\" ".(isset($_GET['id2']) ? "disabled='disabled'" : "")." required='required' />\n";
                     echo "\t\t\t\t<button type=\"submit\">Rechercher</button>\n";
                     echo "\t\t\t</form>\n";
                 }

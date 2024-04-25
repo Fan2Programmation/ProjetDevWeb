@@ -130,6 +130,24 @@
     }
 
     /**
+     * Fonction permettant de récupérer le nom de la gare à partir de son identifiant
+     * @param id l'identifiant de la gare
+     * @return nom le nom de la gare
+     */
+    function nomDeLaGare(string $id):string {
+        $url = NAVITIA_URL."coverage/fr-idf/stop_areas/".$id;
+        $fluxjson = file_get_contents($url);
+
+        if($fluxjson !== false) {
+            $donnees = json_decode($fluxjson, true);
+            if(isset($donnees['stop_areas'][0]['name'])) {
+                return $donnees['stop_areas'][0]['name'];
+            }
+        }
+        return "";
+    }
+
+    /**
      * Fonction permettant l'affichage d'un itinéraire entre deux gares à partir de leurs deux codes UIC
      * @param id l'identifiant de la gare de départ
      * @param id2 l'identifiant de la gare d'arrivée
