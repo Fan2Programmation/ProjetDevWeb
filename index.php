@@ -4,7 +4,6 @@ $desc = "Aide à la mobilité intra-muros";
 $keywords = "PHP, Université, Projet";
 $update_date = "25/03/2024";
 $update_hour = "15:23";
-require "./include/functionsSNCF.inc.php";
 require "./include/header.inc.php";
 
 // Définir ou mettre à jour le cookie lors de la soumission du formulaire

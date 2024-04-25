@@ -4,7 +4,6 @@ $desc = "Aide à la mobilité intra-muros";
 $keywords = "PHP, Université, Projet";
 $update_date = "25/03/2024";
 $update_hour = "15:23";
-require "./include/functionsSNCF.inc.php";
 require "./include/header.inc.php";
 
 // Définir ou mettre à jour le cookie lors de la soumission du formulaire
@@ -21,11 +20,11 @@ require "./include/header.inc.php";
     <main>
         <section id="statistiques">
             <h1>Statistiques</h1>
-            <article id ="statistiques">
+            <article id ="histogramme">
                 <h2>Histogramme</h2>
                 <?php genererHistogramme(); ?>
                 <figure>
-                    <img src="./images/histogramme.png" alt="Histogramme des gares consultées">
+                    <img src="./images/histogramme.png" alt="Histogramme des gares consultées"/>
                     <figcaption>Figure 1 : Histogramme des gares consultées</figcaption>
                 </figure>
             </article>

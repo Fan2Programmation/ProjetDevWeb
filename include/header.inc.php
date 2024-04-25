@@ -1,5 +1,5 @@
 <?php
-    require "./include/functions.inc.php";
+    require "./include/functionsSNCF.inc.php";
 
     // Définir ou changer le mode (dark ou light)
     if (isset($_POST['theme'])) { // Vérifie si le formulaire a été soumis via l'image
@@ -49,7 +49,7 @@
         </nav>
         <aside><?php randomImage(); ?></aside>
         <form id="viewmode" method="post">
-            <input type="hidden" name="theme" value="<?php echo $otherTheme; ?>">
-            <input type="image" src="<?php echo $image; ?>" alt="Change viewmode">
+            <input type="hidden" name="theme" value="<?php echo $otherTheme; ?>"/>
+            <input type="image" src="<?php echo $image; ?>" alt="Change viewmode"/>
         </form>
     </header>
