@@ -76,18 +76,22 @@ require "./include/header.inc.php";
                     }
                     // Enfin si on a bien récupéré l'identifiant des deux gares voulues
                     if (isset($_GET['id']) && isset($_GET['id2'])) {
+                        $type = isset($_GET['type']) ? $_GET['type'] : '';
+                        $date = isset($_GET['date']) ? $_GET['date'] : '';
+                        $heure = isset($_GET['heure']) ? $_GET['heure'] : '';
+
                         echo "\t\t\t\t<form action=\"index.php\" method=\"get\" target=\"_self\">\n";
                         echo "\t\t\t\t\t<select name=\"type\" required>\n";
-                        echo "\t\t\t\t\t\t<option value=\"depart\">Départ</option>\n";
-                        echo "\t\t\t\t\t\t<option value=\"arrivee\">Arrivée</option>\n";
+                        echo "\t\t\t\t\t\t<option value=\"depart\" ".($type == 'depart' ? 'selected' : '').">Départ</option>\n";
+                        echo "\t\t\t\t\t\t<option value=\"arrivee\" ".($type == 'arrivee' ? 'selected' : '').">Arrivée</option>\n";
                         echo "\t\t\t\t\t</select>\n";
-                        echo "\t\t\t\t\t<input type=\"date\" name=\"date\" required/>\n";
-                        echo "\t\t\t\t\t<input type=\"time\" name=\"heure\" required/>\n";
+                        echo "\t\t\t\t\t<input type=\"date\" name=\"date\" value=\"".htmlspecialchars($date)."\" required/>\n";
+                        echo "\t\t\t\t\t<input type=\"time\" name=\"heure\" value=\"".htmlspecialchars($heure)."\" required/>\n";
                         echo "\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"".$_GET['id']."\" />\n";
                         echo "\t\t\t\t\t<input type=\"hidden\" name=\"id2\" value=\"".$_GET['id2']."\" />\n";
                         echo "\t\t\t\t\t<button type=\"submit\">Go !</button>\n";
                         echo "\t\t\t\t</form>\n";
-                        if (isset($_GET['id']) && isset($_GET['id2']) && isset($_GET['type']) && isset($_GET['date']) && isset($_GET['heure'])) {
+                        if (isset($_GET['type']) && isset($_GET['date']) && isset($_GET['heure'])) {
                             stockerGareConsultee($_GET['id']);
                             stockerGareConsultee($_GET['id2']);
                             echo afficherItineraire($_GET['id'], $_GET['id2'], $_GET['type'], $_GET['date'], $_GET['heure']);

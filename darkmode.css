@@ -203,4 +203,9 @@ nav ul li a {
 input[type="image"] {
     background-color: var(--bleu-sncf);
     border: none; /* Enlève la bordure qui est souvent ajoutée par défaut */
-  }
+}
+
+select {
+    background-color: var(--background);
+    color: white;
+}
