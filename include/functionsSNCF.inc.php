@@ -283,7 +283,7 @@
         if (isset($_COOKIE['derniereGareConsultee'])) {
             $cookieValue = $_COOKIE['derniereGareConsultee'];
             $data = explode('|', $cookieValue);
-            return "Dernière gare consultée : ".$data[0]." le ".$data[1];
+            return $data[0]." le ".$data[1];
         }
         return "Aucune gare consultée récemment";
     }
@@ -360,6 +360,29 @@
             }
         } else {
             echo "<p>Le dossier spécifié n'existe pas.</p>";
+        }
+    }
+
+    /**
+     * Fonction permettant d'afficher les gares proches d'une position géographique donnée
+     * @param latitude la latitude de la position géographique
+     * @param longitude la longitude de la position géographique
+     */
+    function gareProche(string $latitude, string $longitude):void {
+        // Construction de l'URL pour les requêtes
+        $url = NAVITIA_URL."/coverage/fr-idf/coords/$longitude;$latitude/places_nearby?distance=1000&type[]=stop_area";
+
+        $fluxjson = file_get_contents($url);
+
+        if($fluxjson !== false) {
+            $donnees = json_decode($fluxjson, true);
+            foreach ($donnees['places_nearby'] as $place) {
+                if ($place['embedded_type'] == 'stop_area') {
+                    echo "<p>".$place['name']."</p>\n";
+                }
+            }
+        } else {
+            echo "<p>Aucune gare trouvée.</p>\n";
         }
     }
 ?>

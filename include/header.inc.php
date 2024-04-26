@@ -1,5 +1,6 @@
 <?php
     require "./include/functionsSNCF.inc.php";
+    require "./include/functionsTECH.inc.php";
 
     // Définir ou changer le mode (dark ou light)
     if (isset($_POST['theme'])) { // Vérifie si le formulaire a été soumis via l'image

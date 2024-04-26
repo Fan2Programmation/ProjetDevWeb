@@ -1,6 +1,10 @@
 <?php
     declare(strict_types=1);
 
+    /**
+     * Affiche le contenu de l'API de la NASA
+     * @return string Le contenu de l'API de la NASA
+     */
     function afficher_contenu():string {
         // notre clé API donnée par la NASA
         $API_KEY = "aP0WZbXQAdVEsMHTU3d4ZlpnHQNBTz0jsgrBeKdl";
@@ -18,9 +22,11 @@
         }
         return $RESULTAT;
     }
-    
 
-
+    /**
+     * Récupère les informations de géolocalisation de l'utilisateur à partir de son adresse IP
+     * @return string Les informations de géolocalisation de l'utilisateur
+     */
     function position_geographiqueXML():string {
         // Récupération de l'adressse ip de l'utilisateur
         $ipAddress = $_SERVER['REMOTE_ADDR'];
@@ -49,11 +55,14 @@
         return $res;
     }
     
+    /**
+     * Récupère les informations de géolocalisation de l'utilisateur à partir de son adresse IP
+     * @return string Les informations de géolocalisation de l'utilisateur
+     */
     function position_geographiqueJSON():string{
 
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $url = "https://ipinfo.io/{$ipAddress}/geo";
-        $response = file_get_contents($url);
         $response = file_get_contents($url);
         if ($response === false) {
             echo "Impossible de récupérer les informations de géolocalisation pour cette adresse IP.";
@@ -74,6 +83,10 @@
         return $res;
     }
 
+    /**
+     * Extrait les informations de l'utilisateur à partir de son adresse IP
+     * @return string Les informations extraites de l'utilisateur
+     */
     function extraction_infoXML():string {
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $apiKey = "58b774fda81ebc97a84914C65290112b";
@@ -98,61 +111,22 @@
         return $res;
     }
 
-    function informationsGare(string $recherche):void {
-        $apiToken = "e4732adc-eefe-4b2c-b528-acdc6bd2f1c5";
-        $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&key=$apiToken";
-    
-        $fluxjson = file_get_contents($url);
-        if ($fluxjson !== false) {
-            $donnee = json_decode($fluxjson, true);
+    /**
+     * Récupère les coordonnées géographiques de l'utilisateur
+     * @return string Les coordonnées géographiques de l'utilisateur
+     */
+    function getUserCoords() {
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+        $url = "https://ipinfo.io/{$ipAddress}/json";
+        $response = file_get_contents($url);
+        if ($response === false) {
+            echo "Impossible de récupérer les informations de géolocalisation pour cette adresse IP.";
         }
-        $infos = $donnee['places'];
-        if (count($infos) == 1) {
-            $gare = $infos[0];
-            echo "<h3>Informations: $recherche</h3>";
-            echo "<p>Nom : ".$gare['name']."</p>";
-            if (isset($gare['stop_area']['coord']['lat']) && isset($gare['stop_area']['coord']['lon'])) {
-                echo "<p>Coordonnées : Latitude " . $gare['stop_area']['coord']['lat'] . ", Longitude " . $gare['stop_area']['coord']['lon'] . "</p>";
-            } else {
-                echo "<p>Coordonnées : Information non disponible</p>";
-            }
-            if(isset($gare['stop_area']['lines'])) {
-                echo "<ul>\n\t<h4>Lignes de bus passant par cet arrêt : </h4>\n";
-                foreach($gare['stop_area']['lines'] as $ligne_de_bus) {
-                    echo "\t<li>Ligne n°:".$ligne_de_bus['code']." ".$ligne_de_bus['name']."</li>\n";
-                }
-                echo "</ul>";
-            }
-        } else {
-            echo "Sélectionnez une gare pour obtenir des informations\n";
-        }
-        echo '<a href="index.php" style="display:inline-block;margin-top:20px;padding:10px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;">Retour</a>';
+        $geoInfo = json_decode($response, true);
+        $coords = explode(',', $geoInfo['loc']); // Sépare la chaîne en un tableau à l'aide de la virgule comme séparateur
+        return [
+            'latitude' => $coords[0],
+            'longitude' => $coords[1]
+        ];
     }
-
-    function listeGaresSimilaires(string $recherche):void {
-        $apiToken = "e4732adc-eefe-4b2c-b528-acdc6bd2f1c5";
-        $url = "https://api.navitia.io/v1/coverage/fr-idf/places?q=" . urlencode($recherche)."&key=$apiToken";
-                          
-        $fluxjson = file_get_contents($url);
-        if ($fluxjson !== false) {
-            $donnee = json_decode($fluxjson, true);
-            $suggestions = array();
-            foreach ($donnee['places'] as $place) {
-                $suggestions[] = $place['name'];
-            }
-            echo "<h3>Résultats de la recherche pour '$recherche'</h3>";
-            if (!empty($suggestions)) {
-                echo "<ul>";
-                foreach ($suggestions as $gare) {
-                    echo "<li><a href='?nom=".urlencode($gare)."'>$gare</a></li>";
-                }
-                echo "</ul>";
-            } else {
-                echo "Aucune gare trouvée pour '$recherche'";
-            }
-        } else {
-            echo "Erreur lors de la récupération des suggestions";
-        }
-    }
-
 ?>

@@ -4,7 +4,6 @@
     $keywords = "PHP, Université, Projet";
     $update_date= "01/03/2024";
     $update_hour= "21:17";
-    require "./include/functionsTECH.inc.php";
     require "./include/header.inc.php";
 ?>
 

@@ -21,7 +21,7 @@ require "./include/header.inc.php";
         <section>
             <h1>Aide à la mobilité en Île-De-France</h1>
             <article id="recherchegare">
-                <h2>Formulaire à remplir</h2>
+                <h2>Obtenir des informations</h2>
                 <form action="index.php" method="get" target="_self">
                     <label for="depart">Gare de départ : </label>
                     <input type="search" id="depart" name="depart" placeholder="<?php  echo isset($_GET['id']) ? nomDeLaGare($_GET['id']) : "Entrez la gare de départ" ?>" <?php echo (isset($_GET['id']) || isset($_GET['depart'])) ? "disabled='disabled'" : "required='required'" ?>/>
@@ -101,7 +101,12 @@ require "./include/header.inc.php";
                 ?>
             </article>
             <article id="derniereGareConsultee">
+                <h2>Dernière gare consultée</h2>
                 <?php echo derniereGareConsultee(); ?>
+            </article>
+            <article id="gareProcheDeChezMoi">
+                <h2>Certains arrêts proches de chez vous</h2>
+                <?php $coords = getUserCoords(); gareProche($coords["latitude"], $coords["longitude"]); ?>
             </article>
         </section>
     </main>
