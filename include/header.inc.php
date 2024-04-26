@@ -40,7 +40,7 @@
 </head>
 <body>
     <header>
-        <a href="index.php"><img src="./images/logo.png" alt="CityTapeur"/></a>
+        <a class="logo" href="index.php"><img src="./images/logo.png" alt="CityTapeur"/></a>
         <nav>
             <ul>
                 <li><a href="index.php">Aide à la mobilité</a></li>

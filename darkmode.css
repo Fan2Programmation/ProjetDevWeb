@@ -22,15 +22,6 @@ body {
     background-color: var(--background);
 }
 
-header {
-    background-color: var(--bleu-sncf);
-    padding: 20px;
-    margin-top: -20px;
-    display: flex; /* Utilisation de Flexbox pour le placement */
-    align-items: center; /* Centre les éléments verticalement */
-    justify-content: space-between; /* Répartit l'espace entre et autour des éléments de contenu */
-}
-
 footer {
     background-color: var(--bleu-sncf);
     color: #fff;
@@ -79,32 +70,9 @@ ul {
     position: relative;
 }
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    left:250px;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    z-index: 1;
-}
-
-nav ul li {
-    color:#333333;
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
-    color:var(--rouge-alerte);
-    font-weight: bold;
-    font-size: 20px;
-    position: relative;
-    left:5px;
-}
-
 a {
     color: var(--rouge-alerte2);
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 article a {
@@ -155,26 +123,6 @@ input:focus, select:focus {
     border-color: var(--bleu-sncf);
 }
 
-.logo {
-    position: absolute; /* Positionnement absolu */
-    left: -15px;
-    top: 42%;
-}
-
-aside {
-    position: relative;
-    top: 0px;
-    right: 660px;
-    z-index: 0;
-}
-
-#viewmode {
-    position: absolute;
-    top: 0px;
-    right: 120px;
-    z-index: 9999; /* Assurez-vous que l'image reste au-dessus de tous les autres Ã©lÃ©ments */
-}
-
 .form {
     display: block;
 }
@@ -187,3 +135,72 @@ input {
     background-color: var(--background);
     color: white;
 }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+    background-color: var(--bleu-sncf)
+}
+
+.logo {
+  flex: 0 0 auto;
+  max-width: 540px; /* Largeur maximale de l'image du logo */
+  display: flex;
+  justify-content: flex-start; /* Aligner le logo à gauche */
+    z-index:2;
+}
+
+aside {
+  position: absolute; /* Permet de positionner la nav par rapport à son parent */
+  left: 50%; /* Démarre la nav au milieu de l'aside */
+  transform: translateX(-50%); /* Décale la nav de la moitié de sa propre largeur pour la centrer parfaitement */
+  display: flex;
+  justify-content: center;
+  width: 100%; /* Donne à la nav la largeur totale de l'aside pour une gestion facile du centrage */
+    z-index: 0
+}
+
+nav {
+  position: absolute; /* Permet de positionner la nav par rapport à son parent */
+  left: 50%; /* Démarre la nav au milieu de l'aside */
+  transform: translateX(-50%); /* Décale la nav de la moitié de sa propre largeur pour la centrer parfaitement */
+  display: flex;
+  font-size: 1.5em;
+  justify-content: center;
+  width: 100%; /* Donne à la nav la largeur totale de l'aside pour une gestion facile du centrage */
+    z-index:1;
+}
+
+/* Ajoutez ces styles si nécessaire pour gérer la liste et les liens dans la navigation */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+    backdrop-filter: blur(10px); /* Ajoute un effet de flou à l'arrière-plan */
+  -webkit-backdrop-filter: blur(10px); /* Pour la compatibilité avec Safari */
+}
+
+nav ul li {
+  padding: 0 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white; /* Ou toute autre couleur souhaitée */
+}
+
+#viewmode {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end; /* Aligner viewmode à droite */
+    z-index: 2;
+}
+
+input[type="image"] {
+    background-color: var(--bleu-sncf);
+    border: none; /* Enlève la bordure qui est souvent ajoutée par défaut */
+  }
