@@ -155,9 +155,21 @@
      * @param id2 l'identifiant de la gare d'arrivée
      * @return res la liste non triée des gares à traverser sur l'itinéraire
      */
-    function afficherItineraire(string $id, string $id2):string {
+    function afficherItineraire(string $id, string $id2, string $type, string $date, string $heure):string {
+        // On va d'abord traiter le date et l'heure pour les transformer en objet DateTime
+        $heure = urldecode($heure);
+        $datetime = new DateTime($date . ' ' . $heure);
+        $datetime = $datetime->format('Ymd\THis');
+
+        // Ensuite on modifie la valeur de $type pour qu'elle corresponde à l'API
+        if($type === "depart") {
+            $type = "departure";
+        } else if($type === "arrivee") {
+            $type = "arrival";
+        }
+
         // On récupère le flux JSON correspondant aux informations relatives à notre recherche
-        $url = NAVITIA_URL."coverage/fr-idf/journeys?from=".$id."&to=".$id2;
+        $url = NAVITIA_URL."coverage/fr-idf/journeys?from=".$id."&to=".$id2."&datetime=".$datetime."&datetime_represents=".$type;
         $fluxjson = file_get_contents($url);
 
         $res = "\t\t\t<h3>Meilleur itinéraire trouvé :</h3>\n";

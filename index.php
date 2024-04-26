@@ -67,7 +67,7 @@ require "./include/header.inc.php";
                         echo "\t\t\t\t<label for=\"arrivee\">Gare d'arrivée : </label>\n";
                         echo "\t\t\t\t<input type=\"search\" id=\"arrivee\" name=\"arrivee\" placeholder=\"".(isset($_GET['id2']) ? nomDeLaGare($_GET['id2']) : "Entrez la gare d'arrivée")."\" ".(isset($_GET['id2']) ? "disabled='disabled'" : "")." required='required' />\n";
                         echo "\t\t\t\t<button type=\"submit\">Rechercher</button>\n";
-                        echo "\t\t\t</form>\n";
+                        echo "\t\t\t\t</form>\n";
                     }
                     // Si l'utilisateur à selectionné une gare d'arrivée
                     if (isset($_GET['arrivee'])) {
@@ -76,9 +76,22 @@ require "./include/header.inc.php";
                     }
                     // Enfin si on a bien récupéré l'identifiant des deux gares voulues
                     if (isset($_GET['id']) && isset($_GET['id2'])) {
-                        stockerGareConsultee($_GET['id']);
-                        stockerGareConsultee($_GET['id2']);
-                        echo afficherItineraire($_GET['id'], $_GET['id2']);
+                        echo "\t\t\t\t<form action=\"index.php\" method=\"get\" target=\"_self\">\n";
+                        echo "\t\t\t\t\t<select name=\"type\" required>\n";
+                        echo "\t\t\t\t\t\t<option value=\"depart\">Départ</option>\n";
+                        echo "\t\t\t\t\t\t<option value=\"arrivee\">Arrivée</option>\n";
+                        echo "\t\t\t\t\t</select>\n";
+                        echo "\t\t\t\t\t<input type=\"date\" name=\"date\" required/>\n";
+                        echo "\t\t\t\t\t<input type=\"time\" name=\"heure\" required/>\n";
+                        echo "\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"".$_GET['id']."\" />\n";
+                        echo "\t\t\t\t\t<input type=\"hidden\" name=\"id2\" value=\"".$_GET['id2']."\" />\n";
+                        echo "\t\t\t\t\t<button type=\"submit\">Go !</button>\n";
+                        echo "\t\t\t\t</form>\n";
+                        if (isset($_GET['id']) && isset($_GET['id2']) && isset($_GET['type']) && isset($_GET['date']) && isset($_GET['heure'])) {
+                            stockerGareConsultee($_GET['id']);
+                            stockerGareConsultee($_GET['id2']);
+                            echo afficherItineraire($_GET['id'], $_GET['id2'], $_GET['type'], $_GET['date'], $_GET['heure']);
+                        }
                     }
                 }
                 ?>
