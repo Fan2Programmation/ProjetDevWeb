@@ -283,9 +283,9 @@
         if (isset($_COOKIE['derniereGareConsultee'])) {
             $cookieValue = $_COOKIE['derniereGareConsultee'];
             $data = explode('|', $cookieValue);
-            return $data[0]." le ".$data[1];
+            return $data[0]." le ".$data[1]."\n";
         }
-        return "Aucune gare consultée récemment";
+        return "Aucune gare consultée récemment\n";
     }
 
     /**
@@ -364,25 +364,32 @@
     }
 
     /**
-     * Fonction permettant d'afficher les gares proches d'une position géographique donnée
+     * Fonction retournant les gares proches d'une position géographique donnée
      * @param latitude la latitude de la position géographique
      * @param longitude la longitude de la position géographique
+     * @return string la liste des gares proches
      */
-    function gareProche(string $latitude, string $longitude):void {
+    function gareProche(string $latitude, string $longitude):string{
         // Construction de l'URL pour les requêtes
         $url = NAVITIA_URL."/coverage/fr-idf/coords/$longitude;$latitude/places_nearby?distance=1000&type[]=stop_area";
 
         $fluxjson = file_get_contents($url);
 
+        $res = "";
+
         if($fluxjson !== false) {
             $donnees = json_decode($fluxjson, true);
-            foreach ($donnees['places_nearby'] as $place) {
-                if ($place['embedded_type'] == 'stop_area') {
-                    echo "<p>".$place['name']."</p>\n";
+            if(isset($donnees['places_nearby'])) {
+                foreach ($donnees['places_nearby'] as $place) {
+                    if(isset($place['embedded_type'])) {
+                        if ($place['embedded_type'] == 'stop_area') {
+                            $res .= "\t\t\t\t<p>".$place['name']."</p>\n";
+                        }
+                    }
                 }
             }
-        } else {
-            echo "<p>Aucune gare trouvée.</p>\n";
         }
+
+        return (($res == "") ? "<p>Aucune gare trouvée à proximité.</p>\n" : $res);
     }
 ?>

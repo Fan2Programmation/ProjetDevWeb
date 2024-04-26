@@ -106,7 +106,7 @@ require "./include/header.inc.php";
             </article>
             <article id="gareProcheDeChezMoi">
                 <h2>Certains arrêts proches de chez vous</h2>
-                <?php $coords = getUserCoords(); gareProche($coords["latitude"], $coords["longitude"]); ?>
+                <?php $coords = getUserCoords(); echo gareProche($coords["latitude"], $coords["longitude"]); ?>
             </article>
         </section>
     </main>
