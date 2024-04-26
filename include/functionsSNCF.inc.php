@@ -153,6 +153,9 @@
      * Fonction permettant l'affichage d'un itinéraire entre deux gares à partir de leurs deux codes UIC
      * @param id l'identifiant de la gare de départ
      * @param id2 l'identifiant de la gare d'arrivée
+     * @param type le type de recherche (départ ou arrivée)
+     * @param date la date de départ/arrivée
+     * @param heure l'heure de départ/arrivée
      * @return res la liste non triée des gares à traverser sur l'itinéraire
      */
     function afficherItineraire(string $id, string $id2, string $type, string $date, string $heure):string {
