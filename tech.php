@@ -2,8 +2,8 @@
     $title= "Projet de développement web";
     $desc = "Projet de développement web";
     $keywords = "PHP, Université, Projet";
-    $update_date= "01/03/2024";
-    $update_hour= "21:17";
+    $update_date = "27/04/2024";
+    $update_hour = "17:52";
     require "./include/header.inc.php";
 ?>
 

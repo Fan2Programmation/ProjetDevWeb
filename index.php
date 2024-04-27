@@ -2,8 +2,8 @@
 $title = "CityTapeur";
 $desc = "Aide à la mobilité intra-muros";
 $keywords = "PHP, Université, Projet";
-$update_date = "25/03/2024";
-$update_hour = "15:23";
+$update_date = "27/04/2024";
+$update_hour = "17:52";
 require "./include/header.inc.php";
 
 // Définir ou mettre à jour le cookie lors de la soumission du formulaire

@@ -6,7 +6,9 @@
     --gris-foncé: #d4d4d4;
     --rouge-alerte: #fd5064;
     --rouge-alerte2: #E2001A;
-    --background: #333333;
+    --background: #3b3b3b;
+    --background2:rgb(44, 44, 44);
+    --background3: #252525;
 }
 
 html, body {
@@ -34,17 +36,18 @@ section, article {
     margin: 20px auto;
     padding: 30px;
     max-width: 1200px;
-    background-color:var(--background);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 section {
     position:relative;
     border-top: 4px solid var(--bleu-clair);
+    background-color: var(--background2);
 }
 
 article {
     border-left: 4px solid var(--rouge-alerte);
+    background-color: var(--background3);
 }
 
 article img {
@@ -113,6 +116,11 @@ a:hover {
     color: #fff;
 }
 
+select {
+    background-color: var(--background2);
+    color: white;
+}
+
 input, select {
     border: 1px solid var(--gris-clair);
     padding: 10px;
@@ -133,7 +141,7 @@ input::placeholder {
 }
 
 input {
-    background-color: var(--background);
+    background-color: var(--background2);
     color: white;
 }
 
@@ -219,11 +227,6 @@ nav ul li:hover, nav ul li a:hover {
 input[type="image"] {
     background-color: var(--bleu-sncf);
     border: none; /* Enlève la bordure qui est souvent ajoutée par défaut */
-}
-
-select {
-    background-color: var(--background);
-    color: white;
 }
 
 .navigation {

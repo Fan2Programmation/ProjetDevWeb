@@ -7,6 +7,8 @@
     --rouge-alerte2: #fd5064;
     --rouge-alerte: #E2001A;
     --background: #ffffff;
+    --background2: #e9e9e9;
+    --background3: #d6d6d6;
 }
 
 html, body {
@@ -34,17 +36,18 @@ section, article {
     margin: 20px auto;
     padding: 30px;
     max-width: 1200px;
-    background-color:var(--background);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 section {
     position:relative;
     border-top: 4px solid var(--bleu-clair);
+    background-color: var(--background2);
 }
 
 article {
     border-left: 4px solid var(--rouge-alerte);
+    background-color: var(--background3);
 }
 
 article img {
@@ -113,6 +116,11 @@ a:hover {
     color: #fff;
 }
 
+select {
+    background-color: var(--background2);
+    color: black;
+}
+
 input, select {
     border: 1px solid var(--gris-clair);
     padding: 10px;
@@ -133,7 +141,7 @@ input::placeholder {
 }
 
 input {
-    background-color: var(--background);
+    background-color: var(--background2);
     color: black;
 }
 
