@@ -86,12 +86,12 @@ require "./include/header.inc.php";
                         $heure = isset($_GET['heure']) ? $_GET['heure'] : '';
 
                         echo "\t\t\t\t<form action=\"index.php\" method=\"get\" target=\"_self\">\n";
-                        echo "\t\t\t\t\t<select name=\"type\" required>\n";
-                        echo "\t\t\t\t\t\t<option value=\"depart\" ".($type == 'depart' ? 'selected' : '').">Départ</option>\n";
-                        echo "\t\t\t\t\t\t<option value=\"arrivee\" ".($type == 'arrivee' ? 'selected' : '').">Arrivée</option>\n";
+                        echo "\t\t\t\t\t<select name=\"type\" required='required'>\n";
+                        echo "\t\t\t\t\t\t<option value=\"depart\" ".($type == 'depart' ? 'selected="selected"' : '').">Départ</option>\n";
+                        echo "\t\t\t\t\t\t<option value=\"arrivee\" ".($type == 'arrivee' ? 'selected="selected"' : '').">Arrivée</option>\n";
                         echo "\t\t\t\t\t</select>\n";
-                        echo "\t\t\t\t\t<input type=\"date\" name=\"date\" value=\"".htmlspecialchars($date)."\" required/>\n";
-                        echo "\t\t\t\t\t<input type=\"time\" name=\"heure\" value=\"".htmlspecialchars($heure)."\" required/>\n";
+                        echo "\t\t\t\t\t<input type=\"date\" name=\"date\" value=\"".htmlspecialchars($date)."\" required='required'/>\n";
+                        echo "\t\t\t\t\t<input type=\"time\" name=\"heure\" value=\"".htmlspecialchars($heure)."\" required='required'/>\n";
                         echo "\t\t\t\t\t<input type=\"hidden\" name=\"id\" value=\"".$_GET['id']."\" />\n";
                         echo "\t\t\t\t\t<input type=\"hidden\" name=\"id2\" value=\"".$_GET['id2']."\" />\n";
                         echo "\t\t\t\t\t<button type=\"submit\">Go !</button>\n";
