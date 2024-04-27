@@ -189,6 +189,8 @@ nav ul {
   justify-content: center;
     backdrop-filter: blur(10px); /* Ajoute un effet de flou à l'arrière-plan */
   -webkit-backdrop-filter: blur(10px); /* Pour la compatibilité avec Safari */
+  border-radius: 15px; /* Arrondir les bords du flou */
+  overflow: hidden;
 }
 
 nav ul li {
