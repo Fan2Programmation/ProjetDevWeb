@@ -200,6 +200,13 @@ nav ul li a {
   color: white; /* Ou toute autre couleur souhaitÃ©e */
 }
 
+nav ul li:hover, nav ul li a:hover {
+    background-color: var(--bleu-clair); /* Ajoute un fond clair au survol pour une meilleure distinction */
+    color: #000; /* Change la couleur du texte au survol */
+    border-radius: 5px; /* Ajoute des bordsarrondis pour un look moderne */
+    text-decoration:none;
+}
+
 #viewmode {
   flex: 0 0 auto;
   display: flex;
@@ -213,35 +220,35 @@ input[type="image"] {
   }
 
 .navigation {
-    margin-right: 60px;
+    position: fixed; /* Fixe la navigation par rapport à la fenêtre du navigateur */
+    top: 90px; /* Décalage du haut pour éviter de chevaucher le header ou tout autre élément */
+    right: 0; /* Ancrer à droite */
     margin-left: 0;
-    position: fixed;
-    top: 90px; /* Ajouter un dÃ©calage en haut si nÃ©cessaire */
     padding: 20px;
     list-style: none;
     z-index: 2;
-    background-color: var(--background); /* Couleur d'arriÃ¨re-plan sombre */
-    border-radius: 10px; /* Bords arrondis */
-    width: 200px; /* DÃ©finir une largeur fixe si nÃ©cessaire */
+    background-color: var(--background); /* Utilise la couleur de fond définie dans la palette de couleurs */
+    border-radius: 10px;
+    width: 200px; /* Définir une largeur fixe pour la barre de navigation */
 }
 
 .navigation a {
-    color: #000; /* Couleur blanche pour les liens */
-    text-decoration: none; /* Pas de soulignement */
-    display: block; /* Faire en sorte que les liens prennent toute la largeur du `li` */
-    transition: color 0.3s ease; /* Transition douce pour les interactions */
+    color: #000; /* Assure que les liens sont visibles */
+    text-decoration: none;
+    display: block;
+    transition: color 0.3s ease;
 }
 
 .navigation li {
     margin-bottom: 20px;
-    padding: 10px 20px; /* Ajuster le padding pour un meilleur rendu visuel */
-    background-color: #dadada; /* Une nuance lÃ©gÃ¨rement diffÃ©rente pour les `li` */
-    border-radius: 5px; /* Bords arrondis pour les `li` */
+    padding: 10px 20px;
+    background-color: #dadada;
+    border-radius: 5px;
 }
 
 .navigation li:hover, .navigation a:hover {
-    background-color: #858585; /* Changement de couleur au survol */
-    color: #eeeeee; /* Changement de couleur du texte au survol, bleu par exemple */
+    background-color: #858585;
+    color: #eeeeee;
 }
 
 /* AmÃ©liorations responsives */
