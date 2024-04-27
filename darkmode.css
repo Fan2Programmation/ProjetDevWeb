@@ -17,6 +17,7 @@ html, body {
 }
 
 body {
+    padding-top: 70px;
     font-family: 'Arial', sans-serif;
     color: var(--gris-foncé);
     background-color: var(--background);
@@ -137,11 +138,17 @@ input {
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-    background-color: var(--bleu-sncf)
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--bleu-sncf);
+    position: fixed; /* Fixe le header en haut de la page */
+    width: 100%; /* Le header doit couvrir toute la largeur */
+    top: 0; /* Positionne le header tout en haut de la page */
+    left: 0; /* Aligner le header à gauche */
+    z-index: 3; /* Assure que le header reste au-dessus des autres éléments lors du défilement */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Optionnel: ajoute une ombre pour mieux le distinguer */
 }
 
 .logo {
@@ -208,4 +215,46 @@ input[type="image"] {
 select {
     background-color: var(--background);
     color: white;
+}
+
+.navigation {
+    margin-right: 60px;
+    margin-left: 0;
+    position: fixed;
+    top: 90px; /* Ajouter un décalage en haut si nécessaire */
+    padding: 20px;
+    list-style: none;
+    z-index: 2;
+    background-color: #333; /* Couleur d'arrière-plan sombre */
+    border-radius: 10px; /* Bords arrondis */
+    width: 200px; /* Définir une largeur fixe si nécessaire */
+}
+
+.navigation a {
+    color: #fff; /* Couleur blanche pour les liens */
+    text-decoration: none; /* Pas de soulignement */
+    display: block; /* Faire en sorte que les liens prennent toute la largeur du `li` */
+    transition: color 0.3s ease; /* Transition douce pour les interactions */
+}
+
+.navigation li {
+    margin-bottom: 20px;
+    padding: 10px 20px; /* Ajuster le padding pour un meilleur rendu visuel */
+    background-color: #444; /* Une nuance légèrement différente pour les `li` */
+    border-radius: 5px; /* Bords arrondis pour les `li` */
+}
+
+.navigation li:hover, .navigation a:hover {
+    background-color: #555; /* Changement de couleur au survol */
+    color: #52a3ff; /* Changement de couleur du texte au survol, bleu par exemple */
+}
+
+/* Améliorations responsives */
+@media (max-width: 768px) {
+    .navigation {
+        margin-right: 0;
+        width: 100%; /* Pleine largeur sur mobile */
+        bottom: 0; /* Positionner la navigation en bas de la page sur mobile */
+        top: auto; /* Désactiver le positionnement en haut */
+    }
 }

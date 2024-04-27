@@ -3,7 +3,7 @@
     --bleu-sncf: #074b99; 
     --bleu-clair: #2b7bbd;
     --gris-clair: #dadada;
-    --gris-foncé: #d4d4d4;
+    --gris-foncÃ©: #d4d4d4;
     --rouge-alerte2: #fd5064;
     --rouge-alerte: #E2001A;
     --background: #ffffff;
@@ -17,6 +17,7 @@ html, body {
 }
 
 body {
+    padding-top: 70px;
     font-family: 'Arial', sans-serif;
     color: #000;
     background-color: var(--background);
@@ -65,8 +66,8 @@ p {
 }
 
 ul {
-    list-style-type: none; /* Enlève les puces */
-    margin-left: 0; /* Enlève la marge par défaut si nécessaire */
+    list-style-type: none; /* EnlÃ¨ve les puces */
+    margin-left: 0; /* EnlÃ¨ve la marge par dÃ©faut si nÃ©cessaire */
     position: relative;
 }
 
@@ -99,7 +100,7 @@ a:hover {
 
 .btn-secondary {
     background-color: var(--gris-clair);
-    color: var(--gris-foncé);
+    color: var(--gris-foncÃ©);
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -108,7 +109,7 @@ a:hover {
 }
 
 .btn-secondary:hover {
-    background-color: var(--gris-foncé);
+    background-color: var(--gris-foncÃ©);
     color: #fff;
 }
 
@@ -137,51 +138,57 @@ input {
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-    background-color: var(--bleu-sncf)
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--bleu-sncf);
+    position: fixed; /* Fixe le header en haut de la page */
+    width: 100%; /* Le header doit couvrir toute la largeur */
+    top: 0; /* Positionne le header tout en haut de la page */
+    left: 0; /* Aligner le header à gauche */
+    z-index: 3; /* Assure que le header reste au-dessus des autres éléments lors du défilement */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Optionnel: ajoute une ombre pour mieux le distinguer */
 }
 
 .logo {
   flex: 0 0 auto;
   max-width: 540px; /* Largeur maximale de l'image du logo */
   display: flex;
-  justify-content: flex-start; /* Aligner le logo à gauche */
+  justify-content: flex-start; /* Aligner le logo Ã  gauche */
     z-index:2;
 }
 
 aside {
-  position: absolute; /* Permet de positionner la nav par rapport à son parent */
-  left: 50%; /* Démarre la nav au milieu de l'aside */
-  transform: translateX(-50%); /* Décale la nav de la moitié de sa propre largeur pour la centrer parfaitement */
+  position: absolute; /* Permet de positionner la nav par rapport Ã  son parent */
+  left: 50%; /* DÃ©marre la nav au milieu de l'aside */
+  transform: translateX(-50%); /* DÃ©cale la nav de la moitiÃ© de sa propre largeur pour la centrer parfaitement */
   display: flex;
   justify-content: center;
-  width: 100%; /* Donne à la nav la largeur totale de l'aside pour une gestion facile du centrage */
+  width: 100%; /* Donne Ã  la nav la largeur totale de l'aside pour une gestion facile du centrage */
     z-index: 0
 }
 
 nav {
-  position: absolute; /* Permet de positionner la nav par rapport à son parent */
-  left: 50%; /* Démarre la nav au milieu de l'aside */
-  transform: translateX(-50%); /* Décale la nav de la moitié de sa propre largeur pour la centrer parfaitement */
+  position: absolute; /* Permet de positionner la nav par rapport Ã  son parent */
+  left: 50%; /* DÃ©marre la nav au milieu de l'aside */
+  transform: translateX(-50%); /* DÃ©cale la nav de la moitiÃ© de sa propre largeur pour la centrer parfaitement */
   display: flex;
   font-size: 1.5em;
   justify-content: center;
-  width: 100%; /* Donne à la nav la largeur totale de l'aside pour une gestion facile du centrage */
+  width: 100%; /* Donne Ã  la nav la largeur totale de l'aside pour une gestion facile du centrage */
     z-index:1;
 }
 
-/* Ajoutez ces styles si nécessaire pour gérer la liste et les liens dans la navigation */
+/* Ajoutez ces styles si nÃ©cessaire pour gÃ©rer la liste et les liens dans la navigation */
 nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   justify-content: center;
-    backdrop-filter: blur(10px); /* Ajoute un effet de flou à l'arrière-plan */
-  -webkit-backdrop-filter: blur(10px); /* Pour la compatibilité avec Safari */
+    backdrop-filter: blur(10px); /* Ajoute un effet de flou Ã  l'arriÃ¨re-plan */
+  -webkit-backdrop-filter: blur(10px); /* Pour la compatibilitÃ© avec Safari */
 }
 
 nav ul li {
@@ -190,17 +197,59 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: white; /* Ou toute autre couleur souhaitée */
+  color: white; /* Ou toute autre couleur souhaitÃ©e */
 }
 
 #viewmode {
   flex: 0 0 auto;
   display: flex;
-  justify-content: flex-end; /* Aligner viewmode à droite */
+  justify-content: flex-end; /* Aligner viewmode Ã  droite */
     z-index: 2;
 }
 
 input[type="image"] {
     background-color: var(--bleu-sncf);
-    border: none; /* Enlève la bordure qui est souvent ajoutée par défaut */
+    border: none; /* EnlÃ¨ve la bordure qui est souvent ajoutÃ©e par dÃ©faut */
   }
+
+.navigation {
+    margin-right: 60px;
+    margin-left: 0;
+    position: fixed;
+    top: 90px; /* Ajouter un dÃ©calage en haut si nÃ©cessaire */
+    padding: 20px;
+    list-style: none;
+    z-index: 2;
+    background-color: var(--background); /* Couleur d'arriÃ¨re-plan sombre */
+    border-radius: 10px; /* Bords arrondis */
+    width: 200px; /* DÃ©finir une largeur fixe si nÃ©cessaire */
+}
+
+.navigation a {
+    color: #000; /* Couleur blanche pour les liens */
+    text-decoration: none; /* Pas de soulignement */
+    display: block; /* Faire en sorte que les liens prennent toute la largeur du `li` */
+    transition: color 0.3s ease; /* Transition douce pour les interactions */
+}
+
+.navigation li {
+    margin-bottom: 20px;
+    padding: 10px 20px; /* Ajuster le padding pour un meilleur rendu visuel */
+    background-color: #dadada; /* Une nuance lÃ©gÃ¨rement diffÃ©rente pour les `li` */
+    border-radius: 5px; /* Bords arrondis pour les `li` */
+}
+
+.navigation li:hover, .navigation a:hover {
+    background-color: #858585; /* Changement de couleur au survol */
+    color: #eeeeee; /* Changement de couleur du texte au survol, bleu par exemple */
+}
+
+/* AmÃ©liorations responsives */
+@media (max-width: 768px) {
+    .navigation {
+        margin-right: 0;
+        width: 100%; /* Pleine largeur sur mobile */
+        bottom: 0; /* Positionner la navigation en bas de la page sur mobile */
+        top: auto; /* DÃ©sactiver le positionnement en haut */
+    }
+}

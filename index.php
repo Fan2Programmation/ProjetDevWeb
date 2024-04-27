@@ -16,11 +16,16 @@ require "./include/header.inc.php";
         $selectedOption = ''; // Aucune option sélectionnée par défaut
     }
 ?>
-
+    <ul class="navigation">
+        <li><a href="#rechercheGare">Obtenir des informations</a></li>
+        <li><a href="#derniereGareConsultee">Dernière gare consultée</a></li>
+        <li><a href="#gareProcheDeChezMoi">Certains arrêts proches de chez vous</a></li>
+        <li><a href="#gareProcheAdresse">Certains arrêts proches d'une adresse</a></li>
+    </ul>
     <main>
         <section>
             <h1>Aide à la mobilité en Île-De-France</h1>
-            <article id="recherchegare">
+            <article id="rechercheGare">
                 <h2>Obtenir des informations</h2>
                 <form action="index.php" method="get" target="_self">
                     <label for="depart">Gare de départ : </label>
