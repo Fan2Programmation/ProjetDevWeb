@@ -115,14 +115,14 @@ require "./include/header.inc.php";
             </article>
             <article id="gareProcheAdresse">
                 <h2>Certains arrêts proches d'une adresse</h2>
-                <form action="index.php" method="get" target="_self">
+                <form action="index.php#gareProcheAdresse" method="get" target="_self">
                 <input type="text" id="adresse" name="adresse" placeholder="<?php echo isset($_GET['adresse']) ? $_GET['adresse'] : "Adresse" ?>" required="required" />
-                <input type="text" id="codePostal" name="codePostal" placeholder="<?php echo isset($_GET['codePostal']) ? $_GET['codePostal'] : "Code postal" ?>" required="required" />
+                <input type="text" id="ville" name="ville" placeholder="<?php echo isset($_GET['ville']) ? $_GET['ville'] : "Ville" ?>" required="required" />
                     <button type="submit">Rechercher</button>
                 </form>
                 <?php
-                if (isset($_GET['adresse']) && isset($_GET['codePostal'])) {
-                    $coords = getAddressCoords($_GET['adresse']." ".$_GET['codePostal']);
+                if (isset($_GET['adresse']) && isset($_GET['ville'])) {
+                    $coords = getAddressCoords($_GET['adresse']." ".$_GET['ville']);
                     if($coords !== null) {
                         echo gareProche($coords["latitude"], $coords["longitude"]);
                     } else {
