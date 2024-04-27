@@ -252,6 +252,11 @@
         // Récupérer le nom de la gare à partir de son identifiant
         $nomGare = nomDeLaGare($id);
 
+        // Récupérer la localisation de l'utilisateur pour des raisons de sécurité
+        $coords = getUserCoords();
+        $latitude = $coords["latitude"];
+        $longitude = $coords["longitude"];
+
         // Nom du fichier CSV
         $fichier = 'gares_consultees.csv';
     
@@ -261,7 +266,7 @@
         // Vérifier si le fichier a été ouvert avec succès
         if ($handle !== false) {
             // Données à écrire dans le fichier CSV
-            $data = [$nomGare, date('Y-m-d H:i:s')];
+            $data = [$nomGare, date('Y-m-d H:i:s'), $latitude, $longitude];
     
             // Écrire les données dans le fichier CSV
             fputcsv($handle, $data);

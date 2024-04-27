@@ -68,15 +68,15 @@
             echo "Impossible de récupérer les informations de géolocalisation pour cette adresse IP.";
         }
 
-        $geoInfo = json_decode($response, true);
+        $donnees = json_decode($response, true);
 
         $res = "\t<table>\n";
 
         $res .= "\t\t<tr>\n\t\t\t<th scope='row'>IP</th>\n\t\t\t<td>" . $ipAddress . "</td>\n\t\t</tr>\n";
-        $res .= "\t\t<tr>\n\t\t\t<th scope='row'>Ville</th>\n\t\t\t<td>" . ($geoInfo['city'] ?? 'Non spécifié') . "</td>\n\t\t</tr>\n";
-        $res .= "\t\t<tr>\n\t\t\t<th scope='row'>Région</th>\n\t\t\t<td>" . ($geoInfo['region'] ?? 'Non spécifié') . "</td>\n\t\t</tr>\n";
-        $res .= "\t\t<tr>\n\t\t\t<th scope='row'>Pays</th>\n\t\t\t<td>" . ($geoInfo['country'] ?? 'Non spécifié') . "</td>\n\t\t</tr>\n";
-        $res .= "\t\t<tr>\n\t\t\t<th scope='row'>Code postal</th>\n\t\t\t<td>" . ($geoInfo['postal'] ?? 'Non spécifié') . "</td>\n\t\t</tr>\n";
+        $res .= "\t\t<tr>\n\t\t\t<th scope='row'>Ville</th>\n\t\t\t<td>" . ($donnees['city'] ?? 'Non spécifié') . "</td>\n\t\t</tr>\n";
+        $res .= "\t\t<tr>\n\t\t\t<th scope='row'>Région</th>\n\t\t\t<td>" . ($donnees['region'] ?? 'Non spécifié') . "</td>\n\t\t</tr>\n";
+        $res .= "\t\t<tr>\n\t\t\t<th scope='row'>Pays</th>\n\t\t\t<td>" . ($donnees['country'] ?? 'Non spécifié') . "</td>\n\t\t</tr>\n";
+        $res .= "\t\t<tr>\n\t\t\t<th scope='row'>Code postal</th>\n\t\t\t<td>" . ($donnees['postal'] ?? 'Non spécifié') . "</td>\n\t\t</tr>\n";
     
         $res .= "\t</table>\n";
 
@@ -122,11 +122,33 @@
         if ($response === false) {
             echo "Impossible de récupérer les informations de géolocalisation pour cette adresse IP.";
         }
-        $geoInfo = json_decode($response, true);
-        $coords = explode(',', $geoInfo['loc']); // Sépare la chaîne en un tableau à l'aide de la virgule comme séparateur
+        $donnees = json_decode($response, true);
+        $coords = explode(',', $donnees['loc']); // Sépare la chaîne en un tableau à l'aide de la virgule comme séparateur
         return [
             'latitude' => $coords[0],
             'longitude' => $coords[1]
         ];
+    }
+
+    /**
+     * Récupère les coordonnées géographiques d'une adresse
+     * @param string $address L'adresse dont on veut récupérer les coordonnées
+     * @return array Les coordonnées géographiques de l'adresse (latitude et longitude)
+     */
+    function getAddressCoords($address) {
+        // On encode l'adresse pour qu'elle soit utilisable dans une URL
+        $address = urlencode($address);
+        $API_key = "310e5cf5652d49148170713344cb016a";
+        // On monte l'URL de l'API avec l'adresse et la clé dedans
+        $url = "https://api.opencagedata.com/geocode/v1/json?q=$address&key=$API_key";
+        $fluxjson = file_get_contents($url);
+        if ($fluxjson !== false) {
+            $donnees = json_decode($fluxjson, true);
+            return [
+                'latitude' => $donnees['results'][0]['geometry']['lat'],
+                'longitude' => $donnees['results'][0]['geometry']['lng']
+            ];
+        }
+        return null;
     }
 ?>

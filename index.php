@@ -108,6 +108,24 @@ require "./include/header.inc.php";
                 <h2>Certains arrêts proches de chez vous</h2>
                 <?php $coords = getUserCoords(); echo gareProche($coords["latitude"], $coords["longitude"]); ?>
             </article>
+            <article id="gareProcheAdresse">
+                <h2>Certains arrêts proches d'une adresse</h2>
+                <form action="index.php" method="get" target="_self">
+                <input type="text" id="adresse" name="adresse" placeholder="<?php echo isset($_GET['adresse']) ? $_GET['adresse'] : "Adresse" ?>" required="required" />
+                <input type="text" id="codePostal" name="codePostal" placeholder="<?php echo isset($_GET['codePostal']) ? $_GET['codePostal'] : "Code postal" ?>" required="required" />
+                    <button type="submit">Rechercher</button>
+                </form>
+                <?php
+                if (isset($_GET['adresse']) && isset($_GET['codePostal'])) {
+                    $coords = getAddressCoords($_GET['adresse']." ".$_GET['codePostal']);
+                    if($coords !== null) {
+                        echo gareProche($coords["latitude"], $coords["longitude"]);
+                    } else {
+                        echo "<p>Impossible de récupérer les informations de géolocalisation pour cette adresse.</p>\n";
+                    }
+                }
+                ?>
+            </article>
         </section>
     </main>
 <?php require "./include/footer.inc.php"; ?>
