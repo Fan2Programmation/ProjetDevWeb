@@ -113,9 +113,9 @@
 
     /**
      * Récupère les coordonnées géographiques de l'utilisateur
-     * @return string Les coordonnées géographiques de l'utilisateur
+     * @return array Les coordonnées géographiques de l'utilisateur
      */
-    function getUserCoords() {
+    function getUserCoords():array {
         $ipAddress = $_SERVER['REMOTE_ADDR'];
         $url = "https://ipinfo.io/{$ipAddress}/json";
         $response = file_get_contents($url);
@@ -135,7 +135,7 @@
      * @param string $address L'adresse dont on veut récupérer les coordonnées
      * @return array Les coordonnées géographiques de l'adresse (latitude et longitude)
      */
-    function getAddressCoords($address) {
+    function getAddressCoords($address):array {
         // On encode l'adresse pour qu'elle soit utilisable dans une URL
         $address = urlencode($address);
         $API_key = "310e5cf5652d49148170713344cb016a";

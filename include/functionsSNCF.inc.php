@@ -3,20 +3,6 @@
     define("NAVITIA_TOKEN", "e4732adc-eefe-4b2c-b528-acdc6bd2f1c5");
     define("NAVITIA_URL", "https://".NAVITIA_TOKEN."@api.navitia.io/v1/");
 
-    // TO-DO LIST
-
-    // (Idée) Heure de départ / Heure d'arrivée que l'utilisateur rentre dans le calcul d'itinéraire
-    // Documentation avec doxygen
-    // Trains et RER (mais pas bus ??)
-    // Améliorer CSS pour adaptabilité en fonction des écrans
-    // Vidéo 3mn - PowerPoint (5 slides max) - Rapport (5 à 10 pages) - readme.md
-
-    // redundant link index.php statistique.php et contraste avec le rouge
-    // https://wave.webaim.org/
-
-    // Validateurs : HTML CSS ACCESSIBILITÉ ÉNÉRGÉTIQUE NOTFOUND FORBIDDEN
-    // A mettre dans le projet : EMBEDDED
-
     /**
      * Fonction créant le svg du logo de la ligne de transport
      * @param label le nom de la ligne de transport
@@ -38,8 +24,6 @@
         return $svg;
     }    
     
-    
-
     /**
      * Fonction permettant d'afficher les prochains départ en gare
      * @param id l'identifiant de la gare
@@ -307,7 +291,7 @@
      * Fonction permettant de générer un histogramme des gares consultées et de l'enregistrer en tant qu'image PNG
      * Nécessite la bibliothèque JpGraph @see http://jpgraph.net/
      */
-    function genererHistogramme() {
+    function genererHistogramme():void {
         require_once ('jpgraph-4.4.2/src/jpgraph.php');
         require_once ('jpgraph-4.4.2/src/jpgraph_bar.php');
     
