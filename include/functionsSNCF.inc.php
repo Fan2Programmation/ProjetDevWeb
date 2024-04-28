@@ -241,7 +241,7 @@
                                     $formattedTime = $minutes . " min " . $seconds . " sec";
                         
                                     // On affiche le temps de marche avec un logo de bonhomme qui marche
-                                    $res .= "\t\t\t<p><img src='./images/walking.png' alt='Walking icon'> Temps de marche: " . $formattedTime . "</p>\n";
+                                    $res .= "\t\t\t<p><img src='./images/walking.png' alt='Walking icon'/> Temps de marche: " . $formattedTime . "</p>\n";
                                 }
                             }
                         }
