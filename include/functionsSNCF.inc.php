@@ -1,7 +1,5 @@
 <?php
     declare(strict_types=1);
-    define("SNCF_TOKEN", "bb7b800f-8205-41c0-998c-09e0f55c2ed7");
-    define("SNCF_URL", "https://".SNCF_TOKEN."@api.sncf.com/v1/");
     define("NAVITIA_TOKEN", "e4732adc-eefe-4b2c-b528-acdc6bd2f1c5");
     define("NAVITIA_URL", "https://".NAVITIA_TOKEN."@api.navitia.io/v1/");
 
@@ -233,6 +231,18 @@
                                     $formattedTime = $minutes . " min " . $seconds . " sec";
                                     $res .= "\t\t\t<p><strong>Temps du changement: </strong>" . $formattedTime . "</p>\n";
                                 }
+                                else if ($section['type'] === "street_network") {
+                                    // On récupère le temps de marche
+                                    $walkingTime = $section['duration'];
+                                    // On divise toutes ces secondes par 60 pour avoir les minutes
+                                    $minutes = intdiv($walkingTime, 60);
+                                    // Le reste de la division sont les secondes restantes
+                                    $seconds = $walkingTime % 60;
+                                    $formattedTime = $minutes . " min " . $seconds . " sec";
+                        
+                                    // On affiche le temps de marche avec un logo de bonhomme qui marche
+                                    $res .= "\t\t\t<p><img src='./images/walking.png' alt='Walking icon'> Temps de marche: " . $formattedTime . "</p>\n";
+                                }
                             }
                         }
                     }
@@ -388,7 +398,8 @@
                 foreach ($donnees['places_nearby'] as $place) {
                     if(isset($place['embedded_type'])) {
                         if ($place['embedded_type'] == 'stop_area') {
-                            $res .= "\t\t\t\t<p>".$place['name']."</p>\n";
+                            $distance = $place['distance'];
+                            $res .= "\t\t\t\t<p>".$place['name']." - <strong>Distance : ".$distance." m</strong></p>\n";
                         }
                     }
                 }
